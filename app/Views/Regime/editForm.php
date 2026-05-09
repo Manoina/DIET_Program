@@ -1,4 +1,4 @@
-<?= $this->setVar('title', 'Test')->extend('Layout/backoffice') ?>
+<?= $this->setVar('title', 'Modification de régime')->extend('Layout/backoffice') ?>
 
 
 <?php $errors = session()->getFlashdata('errors') ?? [] ?>

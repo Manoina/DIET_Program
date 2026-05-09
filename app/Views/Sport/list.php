@@ -1,4 +1,4 @@
-<?= $this->setVar('title', 'Régimes')->extend('Layout/backoffice') ?>
+<?= $this->setVar('title', 'Activités')->extend('Layout/backoffice') ?>
 
 
 <?php
