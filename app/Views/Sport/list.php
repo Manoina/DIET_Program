@@ -14,11 +14,11 @@ $sports = [
 
 <?= $this->section('topbar') ?>
 <div class="page-title">
-  <h1>Sports</h1>
-  <p>Gérez les sports proposés.</p>
+  <h1>Activités sportives</h1>
+  <p>Gérez les activités sportives proposées.</p>
 </div>
 <div class="topbar-actions">
-  <a href="<?= base_url('/backoffice/sports/new') ?>" class="btn btn-primary">Créer un nouveau sport</a>
+  <a href="<?= base_url('/backoffice/sports/new') ?>" class="btn btn-primary">Créer une nouvelle activité</a>
 </div>
 <?= $this->endSection() ?>
 
