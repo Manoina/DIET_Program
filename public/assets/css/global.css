@@ -41,6 +41,13 @@ body {
     overflow: hidden;
 }
 
+hr {
+    border: none;
+    height: 1px;
+    background-color: rgba(102, 102, 153, 0.2);
+    margin: 20px 0;
+}
+
 /* Sidebar styles */
 .sidebar {
     width: 280px;
@@ -292,6 +299,8 @@ body {
 
 .form-group input[type="text"],
 .form-group input[type="number"],
+.form-group input[type="email"],
+.form-group input[type="password"],
 .form-group select {
     width: 100%;
     padding: 12px;
@@ -333,6 +342,8 @@ body {
 
 .form-group input[type="text"]:focus,
 .form-group input[type="number"]:focus,
+.form-group input[type="email"]:focus,
+.form-group input[type="password"]:focus,
 .form-group select:focus {
     border-color: var(--orchid);
     box-shadow: 0 0 0 4px var(--ring);
