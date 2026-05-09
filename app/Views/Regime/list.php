@@ -18,7 +18,7 @@ $regimes = [
   <p>Gérez les régimes proposés.</p>
 </div>
 <div class="topbar-actions">
-  <a class="btn btn-primary">Créer un nouveau régime</a>
+  <a href="<?= base_url('/backoffice/regimes/new') ?>" class="btn btn-primary">Créer un nouveau régime</a>
 </div>
 <?= $this->endSection() ?>
 
