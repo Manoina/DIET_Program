@@ -159,6 +159,7 @@ body {
     font-weight: 700;
     font-size: 14px;
     text-align: center;
+    text-decoration: none;
     line-height: normal;
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
@@ -353,4 +354,103 @@ body {
 
 form .btn.btn-primary {
     width: 100%;
+}
+
+/* Table styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    background: var(--card);
+}
+
+th, td {
+    padding: 14px 18px;
+    text-align: left;
+    border-bottom: 1px solid rgba(102, 102, 153, 0.1);
+    font-size: 14px;
+}
+
+th {
+    background: rgba(184, 112, 184, 0.08);
+    font-weight: 700;
+    color: var(--purple-deep);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 13px;
+}
+
+tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+tbody tr:hover {
+    background: rgba(184, 112, 184, 0.04);
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.table-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.table-actions .btn {
+    padding: 8px 16px;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+}
+
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(51, 15, 66, 0.5);
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--card);
+    padding: 28px;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    max-width: 512px;
+    width: 90%;
+}
+
+.modal-content h3 {
+    margin-bottom: 16px;
+    color: var(--purple-deep);
+    font-weight: 700;
+}
+
+.modal-content p {
+    margin-bottom: 24px;
+    color: var(--text);
+}
+
+.modal-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
 }
