@@ -63,6 +63,7 @@ $regimes = [
     <h3>Confirmer la suppression</h3>
     <p>Êtes-vous sûr de vouloir supprimer <strong id="nom-regime-span"></strong> ? Cette action est irréversible.</p>
     <form id="delete-form" method="post" action="<?= base_url('/backoffice/regimes/delete') ?>">
+      <?= csrf_field() ?>
       <div class="modal-actions">
         <button type="button" class="btn btn-other" id="cancel-delete-button">Annuler</button>
         <button type="submit" class="btn btn-danger">Supprimer</button>
