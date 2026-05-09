@@ -1,3 +1,6 @@
+<?php $error= session()->getFlashdata('error') ?? ''; ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,6 +27,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Se connecter</button>
+        <small class="error-text"><?= $error ?></small>
       </form>
     </div>
   </div>
