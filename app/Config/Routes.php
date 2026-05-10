@@ -17,11 +17,11 @@ $routes->post('frontoffice/login', 'Frontoffice\AuthController::loginTraiter');
 
 // Signup étape 1 — infos personnelles
 $routes->get('frontoffice/signup',  'Frontoffice\AuthController::signupForm');
-$routes->post('frontoffice/signup', 'Frontoffice\AuthController::signupTraiter');
+$routes->post('frontoffice/signup', 'Frontoffice\AuthController::signupTraiter1');
 
 // Signup étape 2 — infos santé
 $routes->get('frontoffice/signup/sante',  'Frontoffice\AuthController::signupSanteForm');
-$routes->post('frontoffice/signup/sante', 'Frontoffice\AuthController::signupSanteTraiter');
+$routes->post('frontoffice/signup/sante', 'Frontoffice\AuthController::signupTraiter2');
 
 // Logout
 $routes->get('frontoffice/logout', 'Frontoffice\AuthController::logout');
