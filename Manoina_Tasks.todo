@@ -16,7 +16,7 @@
     
 [x] => Tout concatener dans une seule table "regime_Users"/UserModel.php
 
-    [] Functions:
+    [x] Functions:
 - Pour Inscription:
    # CRUD Already provided by CodeIgniter's Model class as JPA (insert, Update, Delete, FindAll, FindById)     
 - Pour Connexion:
@@ -81,4 +81,25 @@
     ✔ Redirection vers Profile @done(26-05-09 16:56)
 
 
-                   ****        
+                   **AdminModel.php**:
+[x] Copier ceux de UserModel.php, et effacer ceux inutiles
+✘ Définition des fonctions spécifiques nécessaire (si besoin) @cancelled(26-05-10 18:38)
+         
+                   **AdminController.php**:
+[x] LoginForm()  # Check connectivité admin
+     ✔ Si existant dans session, rediriger vers dashboard.php @done(26-05-10 20:39)
+     ✔ Sinon, rediriger vers loginForm.php @done(26-05-10 20:43)
+[x] SubmitLoginForm() 
+     ✔  Recuperer données saisies @done(26-05-10 20:51)
+     ✔  Vérification de l'email @done(26-05-10 20:53)
+       ✔  Si email non existante, rediriger vers loginForm.php avec message @done(26-05-10 20:56)
+       ✔ Si email existante, Vérification du password @done(26-05-10 21:04)
+         ✔  Si passwd incorrrect, rediriger vers loginForm.php avec message "Mot de passe incorrect" @done(26-05-10 21:09)
+         ✔  Si passwd correct, Stocker les infos de l'admin dans une session, puis rediriger vers dashboard.php @done(26-05-10 21:12)
+[x] Logout()
+     ✔ SessionDestroy() @done(26-05-10 21:16)
+     ✔ Rediriger vers backoffice/login @done(26-05-10 21:18)
+[x] Dashboard()
+       ✔ Redirection vers dashboard.php @done(26-05-10 21:22)
+
+       

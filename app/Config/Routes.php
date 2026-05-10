@@ -8,7 +8,7 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index');
 
 // =============================================================
-//  FRONT OFFICE — Authentification
+//  FRONT OFFICE — Authentification (AuthController)
 // =============================================================
 
 // Login
@@ -27,8 +27,23 @@ $routes->post('frontoffice/signup/sante', 'Frontoffice\AuthController::signupTra
 $routes->get('frontoffice/logout', 'Frontoffice\AuthController::logout');
 
 // =============================================================
-//  FRONT OFFICE — Profil utilisateur
+//  FRONT OFFICE — Profil utilisateur (UserController)
 // =============================================================
+
 $routes->get('frontoffice/profil',           'Frontoffice\UserController::profile');
 $routes->get('frontoffice/profil/modifier',  'Frontoffice\UserController::editForm');
 $routes->post('frontoffice/profil/modifier', 'Frontoffice\UserController::submitEditForm');
+
+// =============================================================
+//  BACK OFFICE — Authentification (AdminController)
+// =============================================================
+
+$routes->get('backoffice/login',  'Backoffice\AdminController::loginForm');
+$routes->post('backoffice/login', 'Backoffice\AdminController::submitLoginForm');
+$routes->get('backoffice/logout', 'Backoffice\AdminController::logout');
+
+// =============================================================
+//  BACK OFFICE — Dashboard (AdminController)
+// =============================================================
+
+$routes->get('backoffice/dashboard', 'Backoffice\AdminController::dashboard');
