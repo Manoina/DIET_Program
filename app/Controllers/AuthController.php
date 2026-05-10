@@ -76,7 +76,7 @@ class AuthController extends BaseController
     }
 
     // POST /frontoffice/signup
-    public function signupTraiter()
+    public function signupTraiter1()
     {
         if (!$this->validate([
             'nom'      => 'required|min_length[2]',
@@ -117,7 +117,7 @@ class AuthController extends BaseController
     }
 
     // POST /frontoffice/signup/sante
-    public function signupSanteTraiter()
+    public function signupTraiter2()
     {
         $step1 = session()->get('signup_step1');
 

@@ -1,0 +1,105 @@
+                    **UserModel.php**:
+    [x] Attributes:                    
+ ✔ Informations identité: @done(26-05-09 13:22)
+    - nom
+    - prénom
+    - email
+    - password
+    - genre
+ ✔ Informations physiques: @done(26-05-09 13:24)
+    - taille
+    - poids
+    - objectif (augmenter, réduire, imc_ideal)
+ ✔ Informations financières: @done(26-05-09 13:26)
+    - solde
+    - is_gold (booléen)
+    
+[x] => Tout concatener dans une seule table "regime_Users"/UserModel.php
+
+    [x] Functions:
+- Pour Inscription:
+   # CRUD Already provided by CodeIgniter's Model class as JPA (insert, Update, Delete, FindAll, FindById)     
+- Pour Connexion:
+   ✔ getByEmail(string $email) # récupérer un utilisateur par son email @done(26-05-09 13:30)
+   ✔ findByEmailEtPassword(string $email, string $password) # Vérification du passwd pour l'email donné @done(26-05-09 13:35)
+
+- Pour la partie santé:
+   ✔ CalculIMC(float $taille, float $poids) @done(26-05-09 13:38)
+
+- Pour la partie financière:
+   ✔ CrediterSolde(int $userId, float $montant) @done(26-05-09 13:40)
+   ✔ DebiterSolde(int $userId, float $montant) @done(26-05-09 13:42)
+   ✔ ActiverGold(int $userId) @done(26-05-09 13:45)
+
+                    **AuthController.php(Controller pour Connexion et Inscription)**:
+[x] Login:
+   ✔ LoginForm() # Afficher le formulaire de connexion @done(26-05-09 13:55)
+   ✔ LoginTraitement() @done(26-05-09 14:36)
+      # TODO: L'authentification est simplifié, on sépare la validation de l'email, puis après la validation du password = facilitation pour l'UX 
+      ✔ Vérification de l'email @done(26-05-09 14:00)
+      ✔ Si **email non existante**: rediriger vers le formulaire en affichant le message "Email non existante" @done(26-05-09 14:10)
+      ✔ Si **email existante**: Vérification du password @done(26-05-09 14:17)
+      ✔ Si **passwd incorrrect**, afficher un message d'erreur "Mot de passe incorrect" @done(26-05-09 14:21)
+      ✔ Si **passwd correct**: @done(26-05-09 14:35)
+        ✔ Stocker les infos de l'user dans une session @done(26-05-09 14:30)
+        ✔ Rediriger vers la page d'accueil @done(26-05-09 14:32)
+   ✔ Logout(): @done(26-05-09 14:43)
+        ✔ SessionDestroy() @done(26-05-09 14:38)
+        ✔ Rediriger vers la page de login @done(26-05-09 14:40)
+
+[x] Signup:
+    ✔ SignupForm() # Afficher le formulaire d'inscription @done(26-05-09 15:26)
+    ✔ SignupTraiter1() # pour les infos d'identités
+        ✔ Si erreur de données saisies, rediriger vers le formulaire en affichant les messages d'erreur correspondants
+        ✔ Sinon stocker dans une session temporaire les infos d'identités et rediriger vers la page suivante pour les infos de santé
+    ✔ SignupSanteForm() # la page suivante pour le formulaire des infos de santé
+    ✔ SignupTraiter2() # pour les infos de santé 
+        ✔ Vérification de la saisie des données identités par session temporaire
+        ✔ Si valeurs null, rediriger vers le formulaire signupForm
+        ✔ Sinon, vérification et validation de la saisie des données de santé
+        ✔ Supprimer la session temporaire
+        ✔ Fusionner les infos identités et santé, puis execute l'insert dans DATABASE
+        ✔ Redirection vers la page de login avec un message de succès "Inscription réussie, vous pouvez maintenant vous connecter"
+                   
+                   **UserController.php**:
+[x] CheckAuth() @done(26-05-09 15:50)
+    # Appelé au début de chaque méthode du controller pour vérifier si l'utilisateur est connecté
+    # Si non connecté, rediriger vers la page de login avec un message "Veuillez vous connecter pour accéder à cette page"
+[x] Profile()
+    ✔ Soutirer les infos de l'user par session @done(26-05-09 16:02)
+    ✔ Rediriger vers la page profile @done(26-05-09 16:07)
+[x] EditForm()
+    ✔ Soutirer les infos de l'user par session @done(26-05-09 16:14)
+    ✔ Rediriger vers la page edit profile @done(26-05-09 16:18)
+    ✔ Pré-remplir le formulaire @done(26-05-09 16:25)
+[x] SubmitEditForm()
+    ✔ Soutirer les infos de l'user par session @done(26-05-09 16:31)
+    ✔ L'user tape les nouvelles données dans le formulaire, puis on valide/vérifie pour que tout respecte les rules @done(26-05-09 16:38)
+    ✔ Si erreur de validation, rediriger vers le formulaire avec message d'erreur @done(26-05-09 16:42)
+    ✔ Sinon, Execute update() dans DATABASE @done(26-05-09 16:46)
+    ✔ Remise en session après la mise à jour des infos @done(26-05-09 16:53)
+    ✔ Redirection vers Profile @done(26-05-09 16:56)
+
+
+                   **AdminModel.php**:
+[x] Copier ceux de UserModel.php, et effacer ceux inutiles
+✘ Définition des fonctions spécifiques nécessaire (si besoin) @cancelled(26-05-10 18:38)
+         
+                   **AdminController.php**:
+[x] LoginForm()  # Check connectivité admin
+     ✔ Si existant dans session, rediriger vers dashboard.php @done(26-05-10 20:39)
+     ✔ Sinon, rediriger vers loginForm.php @done(26-05-10 20:43)
+[x] SubmitLoginForm() 
+     ✔  Recuperer données saisies @done(26-05-10 20:51)
+     ✔  Vérification de l'email @done(26-05-10 20:53)
+       ✔  Si email non existante, rediriger vers loginForm.php avec message @done(26-05-10 20:56)
+       ✔ Si email existante, Vérification du password @done(26-05-10 21:04)
+         ✔  Si passwd incorrrect, rediriger vers loginForm.php avec message "Mot de passe incorrect" @done(26-05-10 21:09)
+         ✔  Si passwd correct, Stocker les infos de l'admin dans une session, puis rediriger vers dashboard.php @done(26-05-10 21:12)
+[x] Logout()
+     ✔ SessionDestroy() @done(26-05-10 21:16)
+     ✔ Rediriger vers backoffice/login @done(26-05-10 21:18)
+[x] Dashboard()
+       ✔ Redirection vers dashboard.php @done(26-05-10 21:22)
+
+       
