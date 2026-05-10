@@ -1,4 +1,4 @@
-<?= $this->setVar('title', 'Crédits')->extend('Layout/backoffice') ?>
+<?= $this->setVar('title', 'Crédits')->extend('Layout/frontoffice') ?>
 
 
 <?php
