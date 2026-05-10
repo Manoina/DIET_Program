@@ -577,6 +577,7 @@ tbody tr:last-child td {
 .details-list {
     display: grid;
     gap: 12px;
+    margin-top: 12px;
 }
 
 .details-list div {
@@ -603,4 +604,9 @@ tbody tr:last-child td {
     font-weight: 700;
     color: var(--text);
     text-align: right;
+}
+
+.price {
+    font-weight: 800;
+    color: var(--orchid);
 }
