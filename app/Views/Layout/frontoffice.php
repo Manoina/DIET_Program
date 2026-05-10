@@ -2,6 +2,11 @@
 $title = $title ?? '…'; // Le titre de la page
 ?>
 
+<?php
+$argent = 120000;
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +26,7 @@ $title = $title ?? '…'; // Le titre de la page
       <img class="avatar" src="<?= base_url('/assets/images/avatar-user.jpg') ?>">
       <div class="profile-info">
         <h3>Nom de l’user</h3>
-        <p>user@example.com</p>
+        <p><?= $argent ?> Ar</p>
       </div>
     </div>
 
