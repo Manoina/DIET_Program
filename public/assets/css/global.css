@@ -610,3 +610,33 @@ tbody tr:last-child td {
     font-weight: 800;
     color: var(--orchid);
 }
+
+/* Badge styles */
+.badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.badge-pending {
+    background: rgba(102, 102, 153, 0.15);
+    color: var(--slate);
+    border: 1px solid rgba(102, 102, 153, 0.3);
+}
+
+.badge-refused {
+    background: rgba(214, 69, 65, 0.15);
+    color: var(--danger);
+    border: 1px solid rgba(214, 69, 65, 0.3);
+}
+
+.badge-accepted {
+    background: rgba(76, 175, 80, 0.15);
+    color: #2e7d32;
+    border: 1px solid rgba(76, 175, 80, 0.3);
+}
