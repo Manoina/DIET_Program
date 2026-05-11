@@ -10,7 +10,6 @@ class UserModel extends Model
     protected $primaryKey    = 'id';
     protected $allowedFields = [
         'nom',
-        'prenom',
         'email',
         'password',
         'genre',
@@ -27,7 +26,6 @@ class UserModel extends Model
 
     protected $validationRules = [
         'nom'      => 'required|min_length[2]',
-        'prenom'   => 'required|min_length[2]',
         'email'    => 'required|valid_email|is_unique[users.email]',
         'password' => 'required|min_length[6]',
         'genre'    => 'required|in_list[homme,femme]',

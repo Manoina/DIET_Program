@@ -14,18 +14,6 @@ class AdminController extends BaseController
         $this->adminModel = new AdminModel();
     }
 
-    // ---------------------------------------------------------------
-    // Vérification auth admin — appelée au début de chaque méthode
-    // ---------------------------------------------------------------
-    private function checkAdminAuth()
-    {
-        $admin = session()->get('admin');
-        if (!$admin || !$admin['admin_connecte']) {
-            return redirect()->to('/backoffice/login');
-        }
-        return null;
-    }
-
     // =============================================================
     //  LOGIN
     // =============================================================

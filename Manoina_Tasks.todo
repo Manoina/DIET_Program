@@ -102,4 +102,60 @@
 [x] Dashboard()
        ✔ Redirection vers dashboard.php @done(26-05-10 21:22)
 
-       
+TODO: Redifine Authentification pour les admins et les users
+[x] Suppression de tout les CheckAuth() dans **AdminController.php**, **UserController.php**         
+[x] Creation de AuthFilters.php et de AdminFilters.php qui gère le CheckAuth() pour les users et les admins respectivement
+[x] Creation de Filters.php pour appliquer les filtres d'authentification sur les routes correspondantes
+[x] Reattribution des Routes pour les controllers AdminController.php et UserController.php
+
+                    **Systeme de Crédits**:
+[x] CreditModel.php @started(26-05-11 21:24)
+      ✔ Attributs: @done(26-05-11 21:48)
+         - id
+         - valeur
+         - Code
+      ✔ Functions: # Tonga de hampidirin'admin ao anaty mainty² @done(26-05-11 22:38)
+      # CRUD de base (insert, update, delete, findAll, findById)
+[x] Credit_userModel.php @started(26-05-11 21:49)
+      ✔ Attributs: @done(26-05-11 21:49)
+         - id
+         - user_id
+         - credit_id
+         - date_demande
+         - admin_id
+         - estAccepté
+         - date_response
+      ✔ Functions: @done(26-05-11 22:20)
+      # CRUD de base (insert, update, delete, findAll, findById)      
+[x] CreditController.php(Frontoffice & Backoffice) @started(26-05-11 22:24)
+   ✔ DemanderCredit() => Insert dans Credit_user avec estAccepté = null et date_response = null @done(26-05-11 22:24)
+   ✔ GetCreditByUser(user_id) @done(26-05-11 22:38)
+   ✔ PendingList() @done(26-05-11 22:24)
+   ✔ AccepterCredit() => Update **estAccepté** dans Credit_user & refuser les autres demandes avec le même crédit @done(26-05-11 22:38)
+   ✔ RefuserCredit() => Update **estAccepté** dans Credit_user @done(26-05-11 22:38)
+
+                     **Routes.php**:
+[x] For Users @started(26-05-11 22:44)
+   ✔ loginForm() @done(26-05-11 22:45)
+   ✔ loginTraiter() @done(26-05-11 22:45)
+   ✔ signupForm() @done(26-05-11 22:45)
+   ✔ signupTraiter1() @done(26-05-11 22:45)
+   ✔ signupSanteForm() @done(26-05-11 22:45)
+   ✔ signupTraiter2() @done(26-05-11 22:45)
+   ✔ logout() @done(26-05-11 22:45)
+   ✔ Profile(): @done(26-05-11 22:45)
+      ✔ EditForm() @done(26-05-11 22:45)
+      ✔ SubmitEditForm() @done(26-05-11 22:45)
+
+[x] For Admins @started(26-05-11 22:45)
+   ✔ loginForm() @done(26-05-11 22:45)
+   ✔ SubmitLoginForm() @done(26-05-11 22:45)
+   ✔ Logout() @done(26-05-11 22:45)
+   ✔ Dashboard() @done(26-05-11 22:45)
+
+[x] For Credit System @started(26-05-11 22:45)
+   ✔ PendingList() @done(26-05-11 22:45)
+   ✔ DemanderCredit() @done(26-05-11 22:45)
+   ✔ GetCreditByUser() @done(26-05-11 22:45
+   ✔ AccepterCredit() @done(26-05-11 22:45)
+   ✔ RefuserCredit() @done(26-05-11 22:45)
