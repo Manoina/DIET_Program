@@ -162,9 +162,9 @@ TODO: Redifine Authentification pour les admins et les users
 
                         ***Achat Gold**:
 [x] Creation Model (user_id, date_achat, prix) @started(26-05-11 23:05)
-[] GoldController.php @started(26-05-11 23:10)
-   ☐ GoldInfo()
-   ☐ BuyGold() #(transaction d'achat:)
-      ☐ Insertion into achat_gold table in DATABASE
-      ☐ Update solde dans UserModel.php
-      ☐ Update is_gold dans UserModel.php
+[x] GoldController.php @started(26-05-11 23:10)
+   ✔ GoldInfo() @done(26-05-11 23:26)
+   ✔ BuyGold() #(transaction d'achat:) @done(26-05-11 23:26)
+      ✔ Insertion into achat_gold table in DATABASE @done(26-05-11 23:26)
+      ✔ Update solde dans UserModel.php @done(26-05-11 23:26)
+      ✔ Update is_gold dans UserModel.php @done(26-05-11 23:26)
