@@ -35,6 +35,10 @@ $routes->group('frontoffice', ['filter' => 'auth'], function ($routes) {
     // Crédits
     $routes->post('credit/demander',   'Frontoffice\CreditController::demanderCredit');
     $routes->get('credit/historique',  'Frontoffice\CreditController::getCreditByUser');
+
+    // Gold
+    $routes->get('gold',          'Frontoffice\GoldController::goldInfo');
+    $routes->post('gold/acheter', 'Frontoffice\GoldController::buyGold');
 });
 
 // =============================================================
