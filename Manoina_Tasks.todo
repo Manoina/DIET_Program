@@ -168,3 +168,33 @@ TODO: Redifine Authentification pour les admins et les users
       ✔ Insertion into achat_gold table in DATABASE @done(26-05-11 23:26)
       ✔ Update solde dans UserModel.php @done(26-05-11 23:26)
       ✔ Update is_gold dans UserModel.php @done(26-05-11 23:26)
+
+                        **Programme de régime**:
+                           ☐ RegimeModele.php:
+[] Régime @started(26-05-11 23:48)
+   ☐ RégimeModel.php @started(26-05-11 23:52)
+        - nom
+        - taux_viandes
+        - taux_poissons
+        - taux_volailles
+        - var_poids_jour # Variation de poids apporté par le régime
+        - prix_jour  
+   ☐ RegimeController.php
+         ☐ regimeList()
+        TODO::  
+         Chaque régime a un but précis: 
+         - soit perdre du poids
+         - soit augmenter du poids
+         - soit atteindre l'IMC
+// Donc, pour la fonction de suggestions, il faut prendre en considération le choix de l'user
+pour proposer des régimes adaptés
+   ☐ Routes.php (update)
+
+[] Sport
+   ☐ SportModel.php @started(26-05-12 00:10)
+        - nom
+        - var_poids_jour
+   ☐ SportController.php
+         ☐ sportList()
+   ☐ Routes.php (update)
+   
