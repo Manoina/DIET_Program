@@ -74,7 +74,6 @@ class UserController extends BaseController
 
         if (!$this->validate([
             'nom'      => 'required|min_length[2]',
-            'prenom'   => 'required|min_length[2]',
             'genre'    => 'required|in_list[homme,femme]',
             'taille'   => 'required|numeric',
             'poids'    => 'required|numeric',
@@ -87,7 +86,6 @@ class UserController extends BaseController
 
         $donnees = [
             'nom'      => $this->request->getPost('nom'),
-            'prenom'   => $this->request->getPost('prenom'),
             'genre'    => $this->request->getPost('genre'),
             'taille'   => $this->request->getPost('taille'),
             'poids'    => $this->request->getPost('poids'),

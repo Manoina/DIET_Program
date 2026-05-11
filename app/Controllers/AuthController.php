@@ -80,7 +80,6 @@ class AuthController extends BaseController
     {
         if (!$this->validate([
             'nom'      => 'required|min_length[2]',
-            'prenom'   => 'required|min_length[2]',
             'email'    => 'required|valid_email|is_unique[users.email]',
             'password' => 'required|min_length[6]',
             'genre'    => 'required|in_list[homme,femme]',
@@ -93,7 +92,6 @@ class AuthController extends BaseController
         // Stocker en session temporaire pour l'étape 2
         session()->set('signup_step1', [
             'nom'      => $this->request->getPost('nom'),
-            'prenom'   => $this->request->getPost('prenom'),
             'email'    => $this->request->getPost('email'),
             'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
             'genre'    => $this->request->getPost('genre'),
