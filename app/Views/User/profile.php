@@ -2,7 +2,7 @@
 
 
 <?php
-$user = ['nom' => 'Rakoto', 'prenom' => 'Jean', 'genre' => 'M', 'email' => 'rakoto@example.com', 'taille' => 150, 'poids' => 50];
+$user = ['nom' => 'Rakoto', 'genre' => 'M', 'email' => 'rakoto@example.com', 'taille' => 150, 'poids' => 50];
 $imc = 22.22;
 ?>
 
@@ -23,7 +23,7 @@ $imc = 22.22;
   <div class="profile-hero">
     <img class="profile-avatar" src="<?= base_url('/assets/images/avatar-user.jpg') ?>">
     <div>
-      <h2><?= esc($user['nom'] . ' ' . $user['prenom']) ?></h2>
+      <h2><?= esc($user['nom']) ?></h2>
       <p><?= esc($user['email']) ?></p>
     </div>
   </div>
@@ -34,8 +34,8 @@ $imc = 22.22;
     <h3>Informations personnelles</h3>
     <dl class="details-list">
       <div>
-        <dt>Nom complet</dt>
-        <dd><?= esc($user['nom'] . ' ' . $user['prenom']) ?></dd>
+        <dt>Nom</dt>
+        <dd><?= esc($user['nom']) ?></dd>
       </div>
       <div>
         <dt>Genre</dt>

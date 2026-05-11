@@ -4,7 +4,7 @@
 <?php $errors = session()->getFlashdata('errors') ?? [] ?>
 
 <?php
-$user = ['nom' => '', 'prenom' => '', 'genre' => 'M', 'email' => '', 'password' => ''];
+$user = ['nom' => '', 'genre' => 'M', 'email' => '', 'password' => ''];
 ?>
 
 
@@ -17,12 +17,6 @@ $user = ['nom' => '', 'prenom' => '', 'genre' => 'M', 'email' => '', 'password' 
     <label for="nom">Nom</label>
     <input id="nom" name="nom" type="text" value="<?= old('nom', $user['nom']) ?>" placeholder="Votre nom" required>
     <small class="error-text"><?= $errors['nom'] ?? '' ?></small>
-  </div>
-
-  <div class="form-group">
-    <label for="prenom">Prénom</label>
-    <input id="prenom" name="prenom" type="text" value="<?= old('prenom', $user['prenom']) ?>" placeholder="Votre prénom" required>
-    <small class="error-text"><?= $errors['prenom'] ?? '' ?></small>
   </div>
 
   <div class="form-group">
