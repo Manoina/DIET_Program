@@ -1,0 +1,2 @@
+ALTER TABLE achats_gold
+ADD COLUMN prix DECIMAL(10,2);
