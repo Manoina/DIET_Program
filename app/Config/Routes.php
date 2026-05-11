@@ -8,34 +8,33 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index');
 
 // =============================================================
-//  FRONT OFFICE — Authentification (AuthController)
+//  FRONT OFFICE — Routes publiques (sans filtre)
 // =============================================================
 
-// Login
 $routes->get('frontoffice/login',  'Frontoffice\AuthController::loginForm');
 $routes->post('frontoffice/login', 'Frontoffice\AuthController::loginTraiter');
 
-// Signup étape 1 — infos personnelles
 $routes->get('frontoffice/signup',  'Frontoffice\AuthController::signupForm');
 $routes->post('frontoffice/signup', 'Frontoffice\AuthController::signupTraiter1');
 
-// Signup étape 2 — infos santé
 $routes->get('frontoffice/signup/sante',  'Frontoffice\AuthController::signupSanteForm');
 $routes->post('frontoffice/signup/sante', 'Frontoffice\AuthController::signupTraiter2');
 
-// Logout
 $routes->get('frontoffice/logout', 'Frontoffice\AuthController::logout');
 
 // =============================================================
-//  FRONT OFFICE — Profil utilisateur (UserController)
+//  FRONT OFFICE — Routes protégées (filtre 'auth')
+//  AuthFilter vérifie session 'connecte' avant chaque requête
 // =============================================================
 
-$routes->get('frontoffice/profil',           'Frontoffice\UserController::profile');
-$routes->get('frontoffice/profil/modifier',  'Frontoffice\UserController::editForm');
-$routes->post('frontoffice/profil/modifier', 'Frontoffice\UserController::submitEditForm');
+$routes->group('frontoffice', ['filter' => 'auth'], function ($routes) {
+    $routes->get('profil',           'Frontoffice\UserController::profile');
+    $routes->get('profil/modifier',  'Frontoffice\UserController::editForm');
+    $routes->post('profil/modifier', 'Frontoffice\UserController::submitEditForm');
+});
 
 // =============================================================
-//  BACK OFFICE — Authentification (AdminController)
+//  BACK OFFICE — Routes publiques (sans filtre)
 // =============================================================
 
 $routes->get('backoffice/login',  'Backoffice\AdminController::loginForm');
@@ -43,7 +42,10 @@ $routes->post('backoffice/login', 'Backoffice\AdminController::submitLoginForm')
 $routes->get('backoffice/logout', 'Backoffice\AdminController::logout');
 
 // =============================================================
-//  BACK OFFICE — Dashboard (AdminController)
+//  BACK OFFICE — Routes protégées (filtre 'admin')
+//  AdminFilter vérifie session 'admin.admin_connecte' avant chaque requête
 // =============================================================
 
-$routes->get('backoffice/dashboard', 'Backoffice\AdminController::dashboard');
+$routes->group('backoffice', ['filter' => 'admin'], function ($routes) {
+    $routes->get('dashboard', 'Backoffice\AdminController::dashboard');
+});

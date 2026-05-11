@@ -102,4 +102,30 @@
 [x] Dashboard()
        ✔ Redirection vers dashboard.php @done(26-05-10 21:22)
 
-       
+TODO: Redifine Authentification pour les admins et les users
+[x] Suppression de tout les CheckAuth() dans **AdminController.php**, **UserController.php**         
+[x] Creation de AuthFilters.php et de AdminFilters.php qui gère le CheckAuth() pour les users et les admins respectivement
+[x] Creation de Filters.php pour appliquer les filtres d'authentification sur les routes correspondantes
+[x] Reattribution des Routes pour les controllers AdminController.php et UserController.php
+
+                    **Systeme de Crédits**:
+[] CreditModel.php
+      ☐ Attributs:
+         - id
+         - valeur
+         - Code
+      ☐ Functions:
+      # CRUD de base (insert, update, delete, findAll, findById)
+[] Credit_userModel.php
+      ☐ Attributs:
+         - id
+         - user_id
+         - credit_id
+         - date_demande
+         - admin_id
+         - estAccepté
+         - date_response
+      ☐ Functions:
+      # CRUD de base (insert, update, delete, findAll, findById)      
+[] CreditController.php
+   ☐   

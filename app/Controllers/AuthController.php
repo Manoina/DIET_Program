@@ -1,165 +1,70 @@
 <?php
 
-namespace App\Controllers\Frontoffice;
+namespace App\Controllers\Backoffice;
 
 use App\Controllers\BaseController;
-use App\Models\UserModel;
+use App\Models\AdminModel;
 
-class AuthController extends BaseController
+class AdminController extends BaseController
 {
-    protected UserModel $userModel;
+    protected AdminModel $adminModel;
 
     public function __construct()
     {
-        $this->userModel = new UserModel();
+        $this->adminModel = new AdminModel();
     }
 
-    // =============================================================
-    //  LOGIN
-    // =============================================================
-
-    // GET /frontoffice/login
+    // GET /backoffice/login
     public function loginForm()
     {
-        if (session()->get('user_id')) {
-            return redirect()->to('/frontoffice/profil');
+        $admin = session()->get('admin');
+        if ($admin && !empty($admin['admin_connecte'])) {
+            return redirect()->to('/backoffice/dashboard');
         }
 
-        return view('Frontoffice/Auth/login');
+        return view('Backoffice/login');
     }
 
-    // POST /frontoffice/login
-    public function loginTraiter()
+    // POST /backoffice/login
+    public function submitLoginForm()
     {
         $email    = $this->request->getPost('email');
         $password = $this->request->getPost('password');
 
-        // Étape 1 — Vérifier si l'email existe
-        $user = $this->userModel->getByEmail($email);
+        $admin = $this->adminModel->getByEmail($email);
 
-        if (!$user) {
+        if (!$admin) {
             return redirect()->back()
                              ->with('error_email', 'Email non existante.')
                              ->withInput();
         }
 
-        // Étape 2 — Vérifier maintenant le mot de passe
-        if (!password_verify($password, $user['password'])) {
+        if (!password_verify($password, $admin['password'])) {
             return redirect()->back()
                              ->with('error_password', 'Mot de passe incorrect.')
                              ->withInput();
         }
 
-        // Tout est bon → session
-        session()->set([
-            'user_id'  => $user['id'],
-            'user_nom' => $user['nom'],
-            'is_gold'  => $user['is_gold'],
-            'connecte' => true,
+        session()->set('admin', [
+            'id'             => $admin['id'],
+            'nom'            => $admin['nom'],
+            'admin_connecte' => true,
         ]);
 
-        return redirect()->to('/frontoffice/profil');
+        return redirect()->to('/backoffice/dashboard');
     }
 
-    // =============================================================
-    //  SIGNUP — Étape 1 : Infos personnelles
-    // =============================================================
-
-    // GET /frontoffice/signup
-    public function signupForm()
-    {
-        if (session()->get('user_id')) {
-            return redirect()->to('/frontoffice/profil');
-        }
-
-        return view('Frontoffice/Auth/signup_step1');
-    }
-
-    // POST /frontoffice/signup
-    public function signupTraiter1()
-    {
-        if (!$this->validate([
-            'nom'      => 'required|min_length[2]',
-            'email'    => 'required|valid_email|is_unique[users.email]',
-            'password' => 'required|min_length[6]',
-            'genre'    => 'required|in_list[homme,femme]',
-        ])) {
-            return redirect()->back()
-                             ->with('errors', $this->validator->getErrors())
-                             ->withInput();
-        }
-
-        // Stocker en session temporaire pour l'étape 2
-        session()->set('signup_step1', [
-            'nom'      => $this->request->getPost('nom'),
-            'email'    => $this->request->getPost('email'),
-            'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
-            'genre'    => $this->request->getPost('genre'),
-        ]);
-
-        return redirect()->to('/frontoffice/signup/sante');
-    }
-
-    // =============================================================
-    //  SIGNUP — Étape 2 : Infos santé
-    // =============================================================
-
-    // GET /frontoffice/signup/sante
-    public function signupSanteForm()
-    {
-        if (!session()->get('signup_step1')) {
-            return redirect()->to('/frontoffice/signup');
-        }
-
-        return view('Frontoffice/Auth/signup_step2');
-    }
-
-    // POST /frontoffice/signup/sante
-    public function signupTraiter2()
-    {
-        $step1 = session()->get('signup_step1');
-
-        if (!$step1) {
-            return redirect()->to('/frontoffice/signup');
-        }
-
-        if (!$this->validate([
-            'taille'   => 'required|numeric',
-            'poids'    => 'required|numeric',
-            'objectif' => 'required|in_list[augmenter,reduire,imc_ideal]',
-        ])) {
-            return redirect()->back()
-                             ->with('errors', $this->validator->getErrors())
-                             ->withInput();
-        }
-
-        $taille = (float) $this->request->getPost('taille');
-        $poids  = (float) $this->request->getPost('poids');
-
-        $donnees = array_merge($step1, [
-            'taille'   => $taille,
-            'poids'    => $poids,
-            'objectif' => $this->request->getPost('objectif'),
-            'solde'    => 0,
-            'is_gold'  => 0,
-        ]);
-
-        $this->userModel->insert($donnees);
-
-        session()->remove('signup_step1');
-
-        return redirect()->to('/frontoffice/login')
-                         ->with('success', 'Inscription réussie ! Connectez-vous.');
-    }
-
-    // =============================================================
-    //  LOGOUT
-    // =============================================================
-
-    // GET /frontoffice/logout
+    // GET /backoffice/logout
     public function logout()
     {
-        session()->destroy();
-        return redirect()->to('/frontoffice/login');
+        session()->remove('admin');
+        return redirect()->to('/backoffice/login');
+    }
+
+    // GET /backoffice/dashboard
+    public function dashboard()
+    {
+        // AdminFilter a déjà vérifié l'auth avant d'arriver ici
+        return view('Backoffice/dashboard');
     }
 }
