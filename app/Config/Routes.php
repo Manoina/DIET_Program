@@ -31,6 +31,10 @@ $routes->group('frontoffice', ['filter' => 'auth'], function ($routes) {
     $routes->get('profil',           'Frontoffice\UserController::profile');
     $routes->get('profil/modifier',  'Frontoffice\UserController::editForm');
     $routes->post('profil/modifier', 'Frontoffice\UserController::submitEditForm');
+
+    // Crédits
+    $routes->post('credit/demander',   'Frontoffice\CreditController::demanderCredit');
+    $routes->get('credit/historique',  'Frontoffice\CreditController::getCreditByUser');
 });
 
 // =============================================================
@@ -48,4 +52,9 @@ $routes->get('backoffice/logout', 'Backoffice\AdminController::logout');
 
 $routes->group('backoffice', ['filter' => 'admin'], function ($routes) {
     $routes->get('dashboard', 'Backoffice\AdminController::dashboard');
+
+    // Crédits
+    $routes->get('credits/pending',          'Backoffice\CreditController::pendingList');
+    $routes->post('credits/accepter/(:num)', 'Backoffice\CreditController::accepterCredit/$1');
+    $routes->post('credits/refuser/(:num)',  'Backoffice\CreditController::refuserCredit/$1');
 });
