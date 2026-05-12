@@ -3,10 +3,6 @@
 
 <?php $errors = session()->getFlashdata('errors') ?? [] ?>
 
-<?php
-$user = ['taille' => '', 'poids' => ''];
-?>
-
 
 <?= $this->section('content') ?>
 <h1 class="form-title">Inscription</h1>
@@ -16,7 +12,7 @@ $user = ['taille' => '', 'poids' => ''];
   <div class="form-group">
     <label for="taille">Taille</label>
     <div class="input-with-suffix">
-      <input id="taille" name="taille" type="number" value="<?= old('taille', $user['taille']) ?>" step="1" min="0" max="300" placeholder="150" required>
+      <input id="taille" name="taille" type="number" value="<?= old('taille', '') ?>" step="1" min="0" max="300" placeholder="150" required>
       <span class="suffix">cm</span>
     </div>
     <small class="error-text"><?= $errors['taille'] ?? '' ?></small>
@@ -25,7 +21,7 @@ $user = ['taille' => '', 'poids' => ''];
   <div class="form-group">
     <label for="poids">Poids</label>
     <div class="input-with-suffix">
-      <input id="poids" name="poids" type="number" value="<?= old('poids', $user['poids']) ?>" step="0.01" min="0" max="200" placeholder="50" required>
+      <input id="poids" name="poids" type="number" value="<?= old('poids', '') ?>" step="0.01" min="0" max="200" placeholder="50" required>
       <span class="suffix">kg</span>
     </div>
     <small class="error-text"><?= $errors['poids'] ?? '' ?></small>

@@ -60,7 +60,7 @@ $prix_gold = 100000;
   <div class="modal-content">
     <h3>Confirmer la mise à niveau</h3>
     <p>Êtes-vous sûr d’acheter l’option GOLD pour <strong><?= $prix_gold ?> Ar</strong> ?</p>
-    <form id="confirm-form" method="post" action="<?= base_url('/frontoffice/gold/buy') ?>">
+    <form id="confirm-form" method="post" action="<?= base_url('/frontoffice/gold/acheter') ?>">
       <?= csrf_field() ?>
       <div class="modal-actions">
         <button type="button" class="btn btn-other" id="cancel-confirm-button">Annuler</button>

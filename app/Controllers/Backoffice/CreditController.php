@@ -64,7 +64,7 @@ class CreditController extends BaseController
              ->set([
                  'estAccepte'    => 0,
                  'admin_id'      => $adminId,
-                 'date_response' => date('Y-m-d H:i:s'),
+                 'date_reponse' => date('Y-m-d H:i:s'),
              ])
              ->update();
 
