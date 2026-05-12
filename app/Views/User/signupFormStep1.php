@@ -3,10 +3,6 @@
 
 <?php $errors = session()->getFlashdata('errors') ?? [] ?>
 
-<?php
-$user = ['nom' => '', 'genre' => 'M', 'email' => '', 'password' => ''];
-?>
-
 
 <?= $this->section('content') ?>
 <h1 class="form-title">Inscription</h1>

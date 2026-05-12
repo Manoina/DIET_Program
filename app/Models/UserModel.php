@@ -15,9 +15,8 @@ class UserModel extends Model
         'genre',
         'taille',
         'poids',
-        'objectif',
         'solde',
-        'is_gold',
+        'est_gold',
     ];
 
     protected $useTimestamps = true;
@@ -28,10 +27,9 @@ class UserModel extends Model
         'nom'      => 'required|min_length[2]',
         'email'    => 'required|valid_email|is_unique[users.email]',
         'password' => 'required|min_length[6]',
-        'genre'    => 'required|in_list[homme,femme]',
+        'genre'    => 'required|in_list[M,F]',
         'taille'   => 'required|numeric',
         'poids'    => 'required|numeric',
-        'objectif' => 'required|in_list[augmenter,reduire,imc_ideal]',
     ];
 
     // ---------------------------------------------------------------
@@ -92,6 +90,6 @@ class UserModel extends Model
     // ---------------------------------------------------------------
     public function activerGold(int $userId): bool
     {
-        return $this->update($userId, ['is_gold' => 1]);
+        return $this->update($userId, ['est_gold' => 1]);
     }
 }

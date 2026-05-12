@@ -3,10 +3,6 @@
 
 <?php $errors = session()->getFlashdata('errors') ?? []; ?>
 
-<?php
-$user = ['nom' => 'Rakoto', 'prenom' => 'Jean', 'genre' => 'M', 'email' => 'rakoto@example.com', 'taille' => '150', 'poids' => '50'];
-?>
-
 
 <?= $this->section('topbar') ?>
 <div class="page-title">
@@ -14,26 +10,20 @@ $user = ['nom' => 'Rakoto', 'prenom' => 'Jean', 'genre' => 'M', 'email' => 'rako
   <p>Modifiez vos informations.</p>
 </div>
 <div class="topbar-actions">
-  <a href="<?= base_url('/frontoffice/profile') ?>" class="btn btn-other">Retour</a>
+  <a href="<?= base_url('/frontoffice/profil') ?>" class="btn btn-other">Retour</a>
 </div>
 <?= $this->endSection() ?>
 
 
 <?= $this->section('content') ?>
 <section class="content-shell">
-  <form method="post" action="<?= base_url("/frontoffice/profile/edit") ?>">
+  <form method="post" action="<?= base_url("/frontoffice/profil/modifier") ?>">
     <?= csrf_field() ?>
 
     <div class="form-group">
       <label for="nom">Nom</label>
       <input id="nom" name="nom" type="text" value="<?= old('nom', $user['nom']) ?>" placeholder="Votre nom" required>
       <small class="error-text"><?= $errors['nom'] ?? '' ?></small>
-    </div>
-
-    <div class="form-group">
-      <label for="prenom">Prénom</label>
-      <input id="prenom" name="prenom" type="text" value="<?= old('prenom', $user['prenom']) ?>" placeholder="Votre prénom" required>
-      <small class="error-text"><?= $errors['prenom'] ?? '' ?></small>
     </div>
 
     <div class="form-group">

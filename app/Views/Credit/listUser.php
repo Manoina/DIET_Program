@@ -1,17 +1,6 @@
 <?= $this->setVar('title', 'Crédits')->extend('Layout/frontoffice') ?>
 
 
-<?php
-$credits = [
-  ['date_demande' => '2026-05-09', 'code' => '41873948752687', 'valeur' => 10000, 'est_accepte' => true],
-  ['date_demande' => '2026-05-09', 'code' => '41873948752687', 'valeur' => 20000, 'est_accepte' => null],
-  ['date_demande' => '2026-05-09', 'code' => '41873948752687', 'valeur' => 5000, 'est_accepte' => false],
-  ['date_demande' => '2026-05-09', 'code' => '41873948752687', 'valeur' => 2000, 'est_accepte' => null],
-  ['date_demande' => '2026-05-09', 'code' => '41873948752687', 'valeur' => 10000, 'est_accepte' => null],
-];
-?>
-
-
 <?= $this->section('topbar') ?>
 <div class="page-title">
   <h1>Crédits</h1>
@@ -21,7 +10,7 @@ $credits = [
 
 
 <?= $this->section('content') ?>
-<form method="post" action="<?= base_url('/frontoffice/credits/use') ?>" class="content-shell">
+<form method="post" action="<?= base_url('/frontoffice/credit/demander') ?>" class="content-shell">
   <?= csrf_field() ?>
 
   <div class="form-group">
@@ -38,15 +27,15 @@ $credits = [
     <th>Valeur</th>
     <th></th>
   </tr>
-  <?php foreach ($credits as $credit): ?>
+  <?php foreach ($demandes as $demande): ?>
     <tr>
-      <td><?= esc($credit['date_demande']) ?></td>
-      <td><?= esc($credit['code']) ?></td>
-      <td><?= esc($credit['valeur']) ?> Ar</td>
+      <td><?= esc($demande['date_demande']) ?></td>
+      <td><?= esc($demande['code']) ?></td>
+      <td><?= esc($demande['valeur']) ?> Ar</td>
       <td>
-        <?php if ($credit['est_accepte'] === null): ?>
+        <?php if ($demande['est_accepte'] === null): ?>
           <span class="badge badge-pending">EN ATTENTE</span>
-        <?php elseif ($credit['est_accepte'] === false): ?>
+        <?php elseif ($demande['est_accepte'] === false): ?>
           <span class="badge badge-refused">REFUSÉ</span>
         <?php else: ?>
           <span class="badge badge-accepted">ACCEPTÉ</span>
