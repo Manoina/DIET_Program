@@ -35,15 +35,15 @@
   </tr>
   <tr>
     <th>Homme</th>
-    <td>123</td>
-    <td>123</td>
-    <td>123</td>
+    <td><?= esc($goalCounts['reduire']['M'] ?? 0) ?></td>
+    <td><?= esc($goalCounts['augmenter']['M'] ?? 0) ?></td>
+    <td><?= esc($goalCounts['imc']['M'] ?? 0) ?></td>
   </tr>
   <tr>
     <th>Femme</th>
-    <td>123</td>
-    <td>123</td>
-    <td>123</td>
+    <td><?= esc($goalCounts['reduire']['F'] ?? 0) ?></td>
+    <td><?= esc($goalCounts['augmenter']['F'] ?? 0) ?></td>
+    <td><?= esc($goalCounts['imc']['F'] ?? 0) ?></td>
   </tr>
 </table>
 
@@ -53,13 +53,18 @@
   const creditChart = document.getElementById('credit-chart');
   const goldChart = document.getElementById('gold-chart');
 
+  const creditLabels = <?= json_encode($creditChartLabels) ?>;
+  const creditData = <?= json_encode($creditChartData) ?>;
+  const goldLabels = <?= json_encode($goldChartLabels) ?>;
+  const goldData = <?= json_encode($goldChartData) ?>;
+
   new Chart(creditChart, {
     type: 'line',
     data: {
-      labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      labels: creditLabels,
       datasets: [{
-          label: 'Achat de crédit',
-        data: [65, 59, 80, 81, 56, 55, 40],
+        label: 'Achat de crédit',
+        data: creditData,
         fill: false,
         borderColor: 'rgb(75, 192, 192)',
         tension: 0.1
@@ -77,12 +82,12 @@
   new Chart(goldChart, {
     type: 'line',
     data: {
-      labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      labels: goldLabels,
       datasets: [{
         label: 'Achat de l’option GOLD',
-        data: [65, 59, 80, 81, 56, 55, 40],
+        data: goldData,
         fill: false,
-        borderColor: 'rgb(75, 192, 192)',
+        borderColor: 'rgb(255, 159, 64)',
         tension: 0.1
       }]
     },
