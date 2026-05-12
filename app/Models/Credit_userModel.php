@@ -6,15 +6,15 @@ use CodeIgniter\Model;
 
 class Credit_userModel extends Model
 {
-    protected $table         = 'credit_user';
+    protected $table         = 'credits_users';
     protected $primaryKey    = 'id';
     protected $allowedFields = [
-        'user_id',
-        'credit_id',
+        'id_user',
+        'id_credit',
         'date_demande',
-        'admin_id',
-        'estAccepte',
-        'date_response',
+        'id_admin',
+        'est_accepte',
+        'date_reponse',
     ];
 
     protected $useTimestamps = false;
@@ -31,7 +31,9 @@ class Credit_userModel extends Model
     // Récupérer les demandes d'un user spécifique
     public function getDemandesUser(int $userId): array
     {
-        return $this->where('user_id', $userId)
+        return $this->select('credits_users.*, credits.code, credits.valeur')
+                    ->join('credits', 'credits.id = credits_users.id_credit')
+                    ->where('id_user', $userId)
                     ->orderBy('date_demande', 'DESC')
                     ->findAll();
     }
@@ -39,9 +41,9 @@ class Credit_userModel extends Model
     // Récupérer toutes les demandes avec détails (user + credit)
     public function getAllAvecDetails(): array
     {
-        return $this->select('credit_user.*, users.nom, users.prenom, credits.code, credits.valeur')
-                    ->join('users',   'users.id   = credit_user.user_id')
-                    ->join('credits', 'credits.id = credit_user.credit_id')
+        return $this->select('credits_users.*, users.nom, users.prenom, credits.code, credits.valeur')
+                    ->join('users',   'users.id   = credits_users.id_user')
+                    ->join('credits', 'credits.id = credits_users.id_credit')
                     ->orderBy('date_demande', 'DESC')
                     ->findAll();
     }
@@ -57,12 +59,12 @@ class Credit_userModel extends Model
     public function soumettreDemande(int $userId, int $creditId): int|false
     {
         return $this->insert([
-            'user_id'      => $userId,
-            'credit_id'    => $creditId,
+            'id_user'      => $userId,
+            'id_credit'    => $creditId,
             'date_demande' => date('Y-m-d H:i:s'),
-            'estAccepte'   => null,   // null = en attente
+            'est_accepte'   => null,   // null = en attente
             'admin_id'     => null,
-            'date_response'=> null,
+            'date_reponse'=> null,
         ]);
     }
 
@@ -71,10 +73,10 @@ class Credit_userModel extends Model
     {
         return $this->update($id, [
             'admin_id'      => $adminId,
-            'estAccepte'    => $accepte ? 1 : 0,
-            'date_response' => date('Y-m-d H:i:s'),
+            'est_accepte'    => $accepte ? 1 : 0,
+            'date_reponse' => date('Y-m-d H:i:s'),
         ]);
     }
 
-    
+
 }

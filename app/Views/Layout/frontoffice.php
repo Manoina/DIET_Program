@@ -32,7 +32,7 @@ $user = model('UserModel')->find(session()->get('user_id'));
 
     <nav class="sidebar-nav">
       <a class="nav-link <?= str_starts_with(uri_string(), 'frontoffice/programme') ? 'active' : '' ?>" href="<?= base_url('/frontoffice/programme') ?>">Mon programme</a>
-      <a class="nav-link <?= str_starts_with(uri_string(), 'frontoffice/credits') ? 'active' : '' ?>" href="<?= base_url('/frontoffice/credits') ?>">Mes crédits</a>
+      <a class="nav-link <?= str_starts_with(uri_string(), 'frontoffice/credit') ? 'active' : '' ?>" href="<?= base_url('/frontoffice/credit/historique') ?>">Mes crédits</a>
       <a class="nav-link <?= str_starts_with(uri_string(), 'frontoffice/gold') ? 'active' : '' ?>" href="<?= base_url('/frontoffice/gold') ?>">Option GOLD</a>
       <a class="nav-link <?= str_starts_with(uri_string(), 'frontoffice/profil') ? 'active' : '' ?>" href="<?= base_url('/frontoffice/profil') ?>">Mon profil</a>
     </nav>
