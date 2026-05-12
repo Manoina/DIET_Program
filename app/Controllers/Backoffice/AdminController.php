@@ -6,7 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\AdminModel;
 use App\Models\AchatGoldModel;
 use App\Models\Credit_userModel;
-use App\Models\ProgrammeModel;
+use App\Models\ProgramModel;
 
 class AdminController extends BaseController
 {
@@ -85,7 +85,7 @@ class AdminController extends BaseController
     {
         $creditUserModel = new Credit_userModel();
         $goldModel       = new AchatGoldModel();
-        $programmeModel  = new ProgrammeModel();
+        $programmeModel  = new ProgramModel();
 
         $days = 30;
         $lastDays = [];
