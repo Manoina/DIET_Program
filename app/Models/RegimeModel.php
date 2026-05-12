@@ -17,6 +17,8 @@ class RegimeModel extends Model
         'prix_jour',
     ];
 
+    protected $useTimestamps = false;
+
     protected $validationRules = [
         'nom'              => 'required|min_length[2]|max_length[30]',
         'taux_viande'      => 'required|numeric',
@@ -33,4 +35,21 @@ class RegimeModel extends Model
             'max_length'  => 'Le nom ne doit pas dépasser 30 caractères.',
         ],
     ];
+
+    public function getByObjectif(string $objectif): array
+    {
+        if ($objectif === 'augmenter') {
+            return $this->where('var_poids_jour >', 0)
+                        ->orderBy('var_poids_jour', 'DESC')
+                        ->findAll();
+        }
+
+        if ($objectif === 'reduire') {
+            return $this->where('var_poids_jour <', 0)
+                        ->orderBy('var_poids_jour', 'ASC')
+                        ->findAll();
+        }
+
+        return $this->orderBy('var_poids_jour', 'ASC')->findAll();
+    }
 }

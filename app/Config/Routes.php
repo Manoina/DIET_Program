@@ -39,6 +39,20 @@ $routes->group('frontoffice', ['filter' => 'auth'], function ($routes) {
     // Gold
     $routes->get('gold',          'Frontoffice\GoldController::goldInfo');
     $routes->post('gold/acheter', 'Frontoffice\GoldController::buyGold');
+
+    // Programme
+    $routes->get('programme',         'Frontoffice\ProgramController::programList');
+    $routes->get('programmes/new',    'Frontoffice\ProgramController::createProgram');
+    $routes->post('programmes/new',   'Frontoffice\ProgramController::createProgram');
+    $routes->get('programmes/user',   'Frontoffice\ProgramController::getProgramByUserId');
+    $routes->get('programmes/user/(:num)', 'Frontoffice\ProgramController::getProgramByUserId/$1');
+    $routes->get('programmes/(:num)/sports', 'Frontoffice\Program_sportController::getSportsByProgramId/$1');
+
+    // Suggestions de programme
+    $routes->get('suggestions/regimes', 'Frontoffice\Suggested_ProgramController::getAllRegimeBy_varPoids_jour');
+    $routes->post('suggestions/regimes', 'Frontoffice\Suggested_ProgramController::getAllRegimeBy_varPoids_jour');
+    $routes->get('suggestions/sports', 'Frontoffice\Suggested_ProgramController::getAllSportBy_varPoids_jour');
+    $routes->post('suggestions/sports', 'Frontoffice\Suggested_ProgramController::getAllSportBy_varPoids_jour');
 });
 
 // =============================================================
@@ -61,7 +75,6 @@ $routes->group('backoffice', ['filter' => 'admin'], function ($routes) {
     $routes->get('credits/pending',          'Backoffice\CreditController::pendingList');
     $routes->post('credits/accepter/(:num)', 'Backoffice\CreditController::accepterCredit/$1');
     $routes->post('credits/refuser/(:num)',  'Backoffice\CreditController::refuserCredit/$1');
-
     // Régimes
     $routes->get('regimes', 'RegimeController::list');
     $routes->get('regimes/new', 'RegimeController::newForm');
