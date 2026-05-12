@@ -4,7 +4,8 @@
 <?php $errors = session()->getFlashdata('errors') ?? []; ?>
 
 <?php
-$credit = ['id' => 3, 'valeur' => 5000, 'code' => '79438745728652'];
+// $credit = ['id' => 3, 'valeur' => 5000, 'code' => '79438745728652'];
+$credit = $credit ?? [];
 ?>
 
 
@@ -21,7 +22,7 @@ $credit = ['id' => 3, 'valeur' => 5000, 'code' => '79438745728652'];
 
 <?= $this->section('content') ?>
 <section class="content-shell">
-  <form method="post" action="<?= base_url("/backoffice/crédits/{$credit['id']}/edit") ?>">
+  <form method="post" action="<?= base_url("/backoffice/credits/{$credit['id']}/edit") ?>">
     <?= csrf_field() ?>
 
     <div class="form-group">

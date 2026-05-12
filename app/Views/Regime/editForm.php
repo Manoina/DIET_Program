@@ -4,7 +4,7 @@
 <?php $errors = session()->getFlashdata('errors') ?? [] ?>
 
 <?php
-$regime = ['id' => 1, 'nom' => 'Régime 1', 'taux_viande' => 12, 'taux_volaille' => 14.90, 'taux_poisson' => 10.25, 'var_poids_jour' => -12, 'prix_jour' => 13];
+$regime = $regime ?? [];
 ?>
 
 

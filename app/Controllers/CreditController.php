@@ -22,14 +22,14 @@ class CreditController extends BaseController
             'credits' => $this->creditModel->findAll(),
         ];
 
-        return view('Backoffice/Credit/list', $data);
+        return view('Credit/list', $data);
     }
 
     // GET /backoffice/credits/new
 
     public function newForm()
     {
-        return view('Backoffice/Credit/newForm');
+        return view('Credit/newForm');
     }
 
     // POST /backoffice/credits/new
@@ -69,18 +69,28 @@ class CreditController extends BaseController
             'credit' => $credit,
         ];
 
-        return view('Backoffice/Credit/editForm', $data);
+        return view('Credit/editForm', $data);
     }
 
     // POST /backoffice/credits/:id/edit
 
     public function submitEditForm(int $id)
     {
-        if (!$this->creditModel->find($id)) {
+        $credit = $this->creditModel->find($id);
+
+        if (!$credit) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
 
         $data = $this->request->getPost();
+
+        $rules = $this->creditModel->getValidationRules();
+
+        // Lors de la modification d'un crédit, ne pas valider l'unicité si le code n'a pas changé
+        if (isset($data['code']) && $data['code'] === $credit['code']) {
+            $rules['code'] = 'required|min_length[5]|max_length[14]';
+            $this->creditModel->setValidationRules($rules);
+        }
 
         if (!$this->creditModel->validate($data)) {
             return redirect()->back()
