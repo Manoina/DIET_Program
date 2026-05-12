@@ -3,7 +3,7 @@ $title = $title ?? '…'; // Le titre de la page
 ?>
 
 <?php
-$argent = 120000;
+$user = model('UserModel')->find(session()->get('user_id'));
 ?>
 
 
@@ -25,20 +25,20 @@ $argent = 120000;
     <div class="profile">
       <img class="avatar" src="<?= base_url('/assets/images/avatar-user.jpg') ?>">
       <div class="profile-info">
-        <h3>Nom de l’user</h3>
-        <p><?= $argent ?> Ar</p>
+        <h3><?= $user['nom'] ?></h3>
+        <p><?= $user['solde'] ?> Ar</p>
       </div>
     </div>
 
     <nav class="sidebar-nav">
-      <a class="nav-link active" href="<?= base_url('/frontoffice/programme') ?>">Mon programme</a>
-      <a class="nav-link" href="<?= base_url('/frontoffice/credits') ?>">Mes crédits</a>
-      <a class="nav-link" href="<?= base_url('/frontoffice/gold') ?>">Option GOLD</a>
-      <a class="nav-link" href="<?= base_url('/frontoffice/profile') ?>">Mon profil</a>
+      <a class="nav-link <?= str_starts_with(uri_string(), 'frontoffice/programme') ? 'active' : '' ?>" href="<?= base_url('/frontoffice/programme') ?>">Mon programme</a>
+      <a class="nav-link <?= str_starts_with(uri_string(), 'frontoffice/credits') ? 'active' : '' ?>" href="<?= base_url('/frontoffice/credits') ?>">Mes crédits</a>
+      <a class="nav-link <?= str_starts_with(uri_string(), 'frontoffice/gold') ? 'active' : '' ?>" href="<?= base_url('/frontoffice/gold') ?>">Option GOLD</a>
+      <a class="nav-link <?= str_starts_with(uri_string(), 'frontoffice/profil') ? 'active' : '' ?>" href="<?= base_url('/frontoffice/profil') ?>">Mon profil</a>
     </nav>
 
     <div class="sidebar-actions">
-      <a class="btn btn-danger">Se déconnecter</a>
+      <a href="<?= base_url('/frontoffice/logout') ?>" class="btn btn-danger">Se déconnecter</a>
     </div>
   </aside>
 
@@ -47,12 +47,15 @@ $argent = 120000;
       <?= $this->renderSection('topbar') ?>
     </header>
 
-    <div class="info good">
-      <strong>Succès :</strong> Ceci est un message qui indique que tout s’est bien passé.
-    </div>
-    <div class="info bad">
-      <strong>Erreur :</strong> Ceci est un message qui indique que quelque chose s’est mal passée.
-    </div>
+    <?php if (session()->getFlashdata('success') !== null): ?>
+      <div class="info good">
+        <strong>Succès :</strong> <?= esc(session()->getFlashdata('success')) ?>
+      </div>
+    <?php elseif (session()->getFlashdata('error') !== null): ?>
+      <div class="info bad">
+        <strong>Erreur :</strong> <?= esc(session()->getFlashdata('error')) ?>
+      </div>
+    <?php endif; ?>
 
     <?= $this->renderSection('content') ?>
   </main>
