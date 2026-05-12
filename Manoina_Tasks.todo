@@ -171,8 +171,8 @@ TODO: Redifine Authentification pour les admins et les users
 
                         **Programme de régime**:
                            ☐ RegimeModele.php:
-[] Régime @started(26-05-11 23:48)
-   ☐ RégimeModel.php @started(26-05-11 23:52)
+[] Régime @started(26-05-12 10:52)
+   ✔ RégimeModel.php @done(26-05-12 14:53) @lasted(4h1m23s)
         - nom
         - taux_viandes
         - taux_poissons
@@ -191,10 +191,38 @@ pour proposer des régimes adaptés
    ☐ Routes.php (update)
 
 [] Sport
-   ☐ SportModel.php @started(26-05-12 00:10)
+   ✔ SportModel.php @done(26-05-12 15:01)
         - nom
         - var_poids_jour
    ☐ SportController.php
          ☐ sportList()
    ☐ Routes.php (update)
    
+[] Programme
+   ✔ ProgramModel.php @started(26-05-12 14:32) @done(26-05-12 15:01) @lasted(29m45s)
+        - id_user
+        - objectif (perte, gain, imc)
+        - poids_cible 
+        - regime_id
+        - duree_regime
+        - date_debut
+        - date_fin
+   ☐ ProgramController.php
+         ☐ programList()
+         ☐ createProgram()
+         ☐ getProgramByUserId()
+   ☐ Routes.php (update)
+
+[] Programme_sport   
+   ✔ ProgramSportModel.php @started(26-05-12 15:01) @done(26-05-12 15:01) @lasted(52s)
+        - id_program
+        - id_sport
+        - quantité
+   ☐ ProgramSportController.php
+         ☐ getSportsByProgramId()
+   ☐ Routes.php (update)
+
+[] Suggested_ProgramController.php
+   ☐ getAllRegimeBy_varPoids_jour()
+   TODO:     
+   ☐ getAllSportBy_varPoids_jour()
