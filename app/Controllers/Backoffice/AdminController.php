@@ -4,6 +4,9 @@ namespace App\Controllers\Backoffice;
 
 use App\Controllers\BaseController;
 use App\Models\AdminModel;
+use App\Models\AchatGoldModel;
+use App\Models\Credit_userModel;
+use App\Models\ProgrammeModel;
 
 class AdminController extends BaseController
 {
@@ -80,6 +83,40 @@ class AdminController extends BaseController
     // GET /backoffice/dashboard
     public function dashboard()
     {
-        return view('Admin/dashboard');
+        $creditUserModel = new Credit_userModel();
+        $goldModel       = new AchatGoldModel();
+        $programmeModel  = new ProgrammeModel();
+
+        $days = 30;
+        $lastDays = [];
+        for ($i = $days - 1; $i >= 0; $i--) {
+            $date = date('Y-m-d', strtotime("-{$i} days"));
+            $lastDays[] = $date;
+        }
+
+        $creditRequests = $creditUserModel->getDailyRequestCounts($days);
+        $goldPurchases  = $goldModel->getDailyPurchaseCounts($days);
+        $goalCounts     = $programmeModel->getGoalCountsByGender();
+
+        $creditCountsByDay = array_column($creditRequests, 'total', 'periode');
+        $goldCountsByDay   = array_column($goldPurchases, 'total', 'periode');
+
+        $creditChartData = [];
+        $goldChartData   = [];
+        $chartLabels     = [];
+
+        foreach ($lastDays as $date) {
+            $chartLabels[] = date('d/m', strtotime($date));
+            $creditChartData[] = isset($creditCountsByDay[$date]) ? (int) $creditCountsByDay[$date] : 0;
+            $goldChartData[]   = isset($goldCountsByDay[$date]) ? (int) $goldCountsByDay[$date] : 0;
+        }
+
+        return view('Admin/dashboard', [
+            'creditChartLabels' => $chartLabels,
+            'creditChartData'   => $creditChartData,
+            'goldChartLabels'   => $chartLabels,
+            'goldChartData'     => $goldChartData,
+            'goalCounts'        => $goalCounts,
+        ]);
     }
 }

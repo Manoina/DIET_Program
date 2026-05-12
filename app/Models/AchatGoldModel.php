@@ -16,6 +16,17 @@ class AchatGoldModel extends Model
 
     protected $useTimestamps = false;
 
+    public function getDailyPurchaseCounts(int $days = 7): array
+    {
+        $startDate = date('Y-m-d', strtotime('-' . ($days - 1) . ' days'));
+
+        return $this->select('DATE(date_achat) AS periode, COUNT(*) AS total', false)
+                    ->where('date_achat >=', $startDate)
+                    ->groupBy('periode')
+                    ->orderBy('periode', 'ASC')
+                    ->findAll();
+    }
+
     public function enregistrer(int $userId, float $prix): int|false
     {
         return $this->insert([
