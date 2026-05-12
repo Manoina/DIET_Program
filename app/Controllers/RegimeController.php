@@ -21,14 +21,14 @@ class RegimeController extends BaseController
             'regimes' => $this->regimeModel->findAll(),
         ];
 
-        return view('Backoffice/Regime/list', $data);
+        return view('Regime/list', $data);
     }
 
 
     // GET /backoffice/regimes/new
     public function newForm()
     {
-        return view('Backoffice/Regime/newForm');
+        return view('Regime/newForm');
     }
 
 
@@ -72,7 +72,7 @@ class RegimeController extends BaseController
             'regime' => $regime,
         ];
 
-        return view('Backoffice/Regime/editForm', $data);
+        return view('Regime/editForm', $data);
     }
 
     // POST /backoffice/regimes/:id/edit
