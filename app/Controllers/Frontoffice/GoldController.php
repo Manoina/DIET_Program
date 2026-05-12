@@ -4,19 +4,19 @@ namespace App\Controllers\Frontoffice;
 
 use App\Controllers\BaseController;
 use App\Models\AchatGoldModel;
+use App\Models\SettingsModel;
 use App\Models\UserModel;
 
 class GoldController extends BaseController
 {
     protected AchatGoldModel $achatGoldModel;
+    protected SettingsModel  $settingsModel;
     protected UserModel      $userModel;
-
-    // Prix de configuration
-    const PRIX_GOLD = 50000;
 
     public function __construct()
     {
         $this->achatGoldModel = new AchatGoldModel();
+        $this->settingsModel  = new SettingsModel();
         $this->userModel      = new UserModel();
     }
 
@@ -27,7 +27,8 @@ class GoldController extends BaseController
 
         return view('Gold/info', [
             'user'      => $user,
-            'prix_gold' => self::PRIX_GOLD,
+            'prix_gold' => $this->settingsModel->getPrixGold(),
+            'reduction_gold' => $this->settingsModel->getReductionGold(),
         ]);
     }
 
@@ -44,16 +45,16 @@ class GoldController extends BaseController
         }
 
         // Vérification 2 — solde suffisant
-        if ($user['solde'] < self::PRIX_GOLD) {
+        if ($user['solde'] < $this->settingsModel->getPrixGold()) {
             return redirect()->back()
                              ->with('error', 'Solde insuffisant. Rechargez votre portefeuille.');
         }
 
         // Étape 1 — Insérer dans achats_gold
-        $this->achatGoldModel->enregistrer($userId, self::PRIX_GOLD);
+        $this->achatGoldModel->enregistrer($userId, $this->settingsModel->getPrixGold());
 
         // Étape 2 — Débiter le solde
-        $this->userModel->debiterSolde($userId, self::PRIX_GOLD);
+        $this->userModel->debiterSolde($userId, $this->settingsModel->getPrixGold());
 
         // Étape 3 — Activer est_gold
         $this->userModel->activerGold($userId);

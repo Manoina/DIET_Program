@@ -85,4 +85,8 @@ $routes->group('backoffice', ['filter' => 'admin'], function ($routes) {
     $routes->get('credits/(:num)/edit', 'CreditController::editForm/$1');
     $routes->post('credits/(:num)/edit', 'CreditController::submitEditForm/$1');
     $routes->post('credits/(:num)/delete', 'CreditController::delete/$1');
+
+    // Settings
+    $routes->get('settings', 'Backoffice\SettingsController::editForm');
+    $routes->post('settings/edit', 'Backoffice\SettingsController::submitEditForm');
 });

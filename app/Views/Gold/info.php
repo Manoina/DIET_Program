@@ -1,11 +1,6 @@
 <?= $this->setVar('title', 'Option GOLD')->extend('Layout/frontoffice') ?>
 
 
-<?php
-$prix_gold = 100000;
-?>
-
-
 <?= $this->section('topbar') ?>
 <div class="page-title">
   <h1>Option GOLD</h1>
@@ -41,7 +36,7 @@ $prix_gold = 100000;
     <dl class="details-list">
       <div>
         <dt>Prix des régimes</dt>
-        <dd>-15%</dd>
+        <dd>-<?= $reduction_gold ?>%</dd>
       </div>
       <div>
         <dt>Accès</dt>
