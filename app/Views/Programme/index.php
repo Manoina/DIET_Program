@@ -1,12 +1,6 @@
 <?= $this->setVar('title', 'Programme')->extend('Layout/frontoffice') ?>
 
 
-<?php
-// $programme = null;
-$programme = ['id' => 1, 'date_fin' => '2026-05-20', 'regime' => ['nom' => 'Régime 1', 'taux_poisson' => 25, 'taux_viande' => 25, 'taux_volaille' => 25], 'sports' => [['nom' => 'Sport 1', 'quantite' => 1], ['nom' => 'Sport 1', 'quantite' => 1], ['nom' => 'Sport 1', 'quantite' => 1]]];
-?>
-
-
 <?= $this->section('topbar') ?>
 <div class="page-title">
   <h1>Programme</h1>
@@ -25,10 +19,31 @@ $programme = ['id' => 1, 'date_fin' => '2026-05-20', 'regime' => ['nom' => 'Rég
       <p>Vous ne suivez pas encore de programme. Planifiez-le maintenant.</p>
     </div>
     <div class="front-banner-actions">
-      <a class="btn btn-primary" href="<?= base_url('/frontoffice/sports') ?>">Planifier un programme</a>
+      <a class="btn btn-primary" href="<?= base_url('/frontoffice/programmes/new') ?>">Planifier un programme</a>
     </div>
   </section>
 <?php else: ?>
+  <section class="front-banner">
+    <div class="front-banner-content">
+      <h2>Objectif :
+        <?php switch ($programme['objectif']) {
+          case 'augmenter':
+            echo 'Augmenter le poids';
+            break;
+          case 'reduire':
+            echo 'Réduire le poids';
+            break;
+          default:
+            echo 'Atteindre l’IMC idéal';
+        } ?>
+      </h2>
+      <p>Avoir <?= esc($programme['poids_cible']) ?> kg</p>
+    </div>
+    <div class="front-banner-actions">
+      <a class="btn btn-danger" href="<?= base_url('/frontoffice/programme/stop') ?>">Arrêter</a>
+      <a class="btn btn-primary" href="<?= base_url('/frontoffice/programme/pdf') ?>">Exporter en PDF</a>
+    </div>
+  </section>
   <div class="flex-row">
     <section class="content-shell flex-grow">
       <h3 class="section-header"><?= esc($programme['regime']['nom']) ?></h3>

@@ -1,18 +1,34 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Frontoffice;
 
 use App\Controllers\BaseController;
+use App\Models\UserModel;
 use App\ThirdParty\FPDF;
 
 class ProgrammePDF extends BaseController
 {
-  public function index()
+    public function index()
     {
-        $user = ['nom' => 'Rakoto', 'genre' => 'M', 'email' => 'rakoto@example.com', 'taille' => 150, 'poids' => 50];
-        $imc = 22.22;
-        $programme = ['id' => 1, 'date_fin' => '2026-05-20', 'regime' => ['nom' => 'Régime 1', 'taux_poisson' => 25, 'taux_viande' => 25, 'taux_volaille' => 25], 'sports' => [['nom' => 'Sport 1', 'quantite' => 1], ['nom' => 'Sport 1', 'quantite' => 1], ['nom' => 'Sport 1', 'quantite' => 1]]];
+        $userModel = new UserModel();
+        $programController = new ProgramController();
+
+        $userId = (int) session()->get('user_id');
+        $user = $userModel->find($userId);
+        $programme = $programController->buildProgrammeForUser($userId);
+        $imc  = $userModel->calculerIMC((float) $user['poids'], (float) $user['taille']);
         $avatarPath = FCPATH . 'assets/images/avatar-user.jpg';
+
+        switch ($programme['objectif']) {
+            case 'augmenter':
+                $objectif = 'Augmenter le poids';
+                break;
+            case 'reduire':
+                $objectif = 'Réduire le poids';
+                break;
+            default:
+                $objectif = 'Atteindre l’IMC idéal';
+        }
 
 
         $this->response->setHeader('Content-Type', 'application/pdf');
@@ -64,13 +80,15 @@ class ProgrammePDF extends BaseController
             ['label' => 'Taille', 'value' => $user['taille'] . ' cm'],
             ['label' => 'Poids', 'value' => $user['poids'] . ' kg'],
             ['label' => 'IMC', 'value' => $imc],
+            ['label' => 'Objectif', 'value' => $objectif],
+            ['label' => 'Poids cible', 'value' => $programme['poids_cible'] . ' kg'],
+            ['label' => 'Date de fin', 'value' => date('d/m/Y', strtotime($programme['date_fin']))],
         ], $marginX);
 
         $this->addSectionCard($pdf, $programme['regime']['nom'], [
             ['label' => 'Taux de viande', 'value' => $programme['regime']['taux_viande'] . '%'],
             ['label' => 'Taux de poisson', 'value' => $programme['regime']['taux_poisson'] . '%'],
             ['label' => 'Taux de volaille', 'value' => $programme['regime']['taux_volaille'] . '%'],
-            ['label' => 'Date de fin', 'value' => date('d/m/Y', strtotime($programme['date_fin']))],
         ], $marginX);
 
         $sportRows = [];

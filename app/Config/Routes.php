@@ -41,18 +41,20 @@ $routes->group('frontoffice', ['filter' => 'auth'], function ($routes) {
     $routes->post('gold/acheter', 'Frontoffice\GoldController::buyGold');
 
     // Programme
-    $routes->get('programme',         'Frontoffice\ProgramController::programList');
-    $routes->get('programmes/new',    'Frontoffice\ProgramController::createProgram');
-    $routes->post('programmes/new',   'Frontoffice\ProgramController::createProgram');
-    $routes->get('programmes/user',   'Frontoffice\ProgramController::getProgramByUserId');
-    $routes->get('programmes/user/(:num)', 'Frontoffice\ProgramController::getProgramByUserId/$1');
-    $routes->get('programmes/(:num)/sports', 'Frontoffice\Program_sportController::getSportsByProgramId/$1');
+    $routes->get('programme',       'Frontoffice\ProgramController::programList');
+    $routes->get('programmes/new',  'Frontoffice\ProgramController::createProgram');
+    $routes->post('programmes/new', 'Frontoffice\ProgramController::createProgram');
+    $routes->get('programme/stop',  'Frontoffice\ProgramController::createProgram');
+    $routes->get('programme/pdf',   'Frontoffice\ProgrammePDF::index');
+    // $routes->get('programmes/user',   'Frontoffice\ProgramController::getProgramByUserId');
+    // $routes->get('programmes/user/(:num)', 'Frontoffice\ProgramController::getProgramByUserId/$1');
+    // $routes->get('programmes/(:num)/sports', 'Frontoffice\Program_sportController::getSportsByProgramId/$1');
 
     // Suggestions de programme
-    $routes->get('suggestions/regimes', 'Frontoffice\Suggested_ProgramController::getAllRegimeBy_varPoids_jour');
-    $routes->post('suggestions/regimes', 'Frontoffice\Suggested_ProgramController::getAllRegimeBy_varPoids_jour');
-    $routes->get('suggestions/sports', 'Frontoffice\Suggested_ProgramController::getAllSportBy_varPoids_jour');
-    $routes->post('suggestions/sports', 'Frontoffice\Suggested_ProgramController::getAllSportBy_varPoids_jour');
+    // $routes->get('suggestions/regimes', 'Frontoffice\Suggested_ProgramController::getAllRegimeBy_varPoids_jour');
+    // $routes->post('suggestions/regimes', 'Frontoffice\Suggested_ProgramController::getAllRegimeBy_varPoids_jour');
+    // $routes->get('suggestions/sports', 'Frontoffice\Suggested_ProgramController::getAllSportBy_varPoids_jour');
+    // $routes->post('suggestions/sports', 'Frontoffice\Suggested_ProgramController::getAllSportBy_varPoids_jour');
 });
 
 // =============================================================

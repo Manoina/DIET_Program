@@ -1,17 +1,6 @@
 <?= $this->setVar('title', 'Nouveau programme')->extend('Layout/frontoffice') ?>
 
 
-<?php
-$programmes = [
-  ['id' => 1, 'regime' => ['id' => 1, 'id' => 1, 'nom' => 'Régime 1', 'prix' => '10000', 'taux_poisson' => 25, 'taux_viande' => 25, 'taux_volaille' => 25], 'sports' => [['id' => 1, 'nom' => 'Sport 1', 'quantite' => 1], ['id' => 1, 'nom' => 'Sport 1', 'quantite' => 1], ['id' => 1, 'nom' => 'Sport 1', 'quantite' => 1]]],
-  ['id' => 2, 'regime' => ['id' => 2, 'id' => 1, 'nom' => 'Régime 2', 'prix' => '10000', 'taux_poisson' => 25, 'taux_viande' => 25, 'taux_volaille' => 25], 'sports' => []],
-  ['id' => 3, 'regime' => ['id' => 3, 'id' => 1, 'nom' => 'Régime 3', 'prix' => '10000', 'taux_poisson' => 25, 'taux_viande' => 25, 'taux_volaille' => 25], 'sports' => [['id' => 1, 'nom' => 'Sport 3', 'quantite' => 3], ['id' => 1, 'nom' => 'Sport 3', 'quantite' => 3], ['id' => 1, 'nom' => 'Sport 3', 'quantite' => 3]]],
-  ['id' => 4, 'regime' => ['id' => 4, 'id' => 1, 'nom' => 'Régime 4', 'prix' => '10000', 'taux_poisson' => 25, 'taux_viande' => 25, 'taux_volaille' => 25], 'sports' => [['id' => 1, 'nom' => 'Sport 4', 'quantite' => 4], ['id' => 1, 'nom' => 'Sport 4', 'quantite' => 4]]],
-  ['id' => 5, 'regime' => ['id' => 5, 'id' => 1, 'nom' => 'Régime 5', 'prix' => '10000', 'taux_poisson' => 25, 'taux_viande' => 25, 'taux_volaille' => 25], 'sports' => [['id' => 1, 'nom' => 'Sport 5', 'quantite' => 5], ['id' => 1, 'nom' => 'Sport 5', 'quantite' => 5], ['id' => 1, 'nom' => 'Sport 5', 'quantite' => 5]]],
-];
-?>
-
-
 <?= $this->section('topbar') ?>
 <div class="page-title">
   <h1>Nouveau programme</h1>

@@ -6,10 +6,10 @@ use CodeIgniter\Model;
 
 class ProgramSportModel extends Model
 {
-    protected $table         = 'program_sport';
+    protected $table         = 'programmes_sports';
     protected $primaryKey    = 'id';
     protected $allowedFields = [
-        'id_program',
+        'id_programme',
         'id_sport',
         'quantite',
     ];
@@ -18,9 +18,9 @@ class ProgramSportModel extends Model
 
     public function getSportsByProgramId(int $programId): array
     {
-        return $this->select('program_sport.*, sports.nom')
-                    ->join('sports', 'sports.id = program_sport.id_sport')
-                    ->where('id_program', $programId)
+        return $this->select('programmes_sports.*, sports.nom')
+                    ->join('sports', 'sports.id = programmes_sports.id_sport')
+                    ->where('id_programme', $programId)
                     ->findAll();
     }
 }

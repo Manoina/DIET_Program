@@ -39,9 +39,10 @@ create table sports(
 create table programmes(
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_user INT,
-    type VARCHAR(30),
+    objectif VARCHAR(30),
     poids_cible DECIMAL(5,2),
-    duree INT,
+    date_debut DATE,
+    date_fin DATE,
     id_regime INT,
     duree_regime INT,
 

@@ -31,7 +31,7 @@
       </div>
     </dl>
   </section>
-  <section class="content-shell flex-grow">
+  <section class="content-shell flex-grow" style="background: linear-gradient(135deg, rgba(184, 112, 184, 0.12), rgba(102, 102, 153, 0.12));">
     <h3 class="section-header">Options GOLD <span class="price"><?= $prix_gold ?> Ar</span></h3>
     <dl class="details-list">
       <div>

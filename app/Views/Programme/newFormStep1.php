@@ -1,17 +1,6 @@
 <?= $this->setVar('title', 'Nouveau programme')->extend('Layout/frontoffice') ?>
 
 
-<?php
-$sports = [
-  ['id' => 1, 'nom' => 'Activité 1'],
-  ['id' => 2, 'nom' => 'Activité 2'],
-  ['id' => 3, 'nom' => 'Activité 3'],
-  ['id' => 4, 'nom' => 'Activité 4'],
-  ['id' => 5, 'nom' => 'Activité 5'],
-];
-?>
-
-
 <?= $this->section('topbar') ?>
 <div class="page-title">
   <h1>Nouveau programme</h1>
