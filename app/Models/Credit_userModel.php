@@ -41,7 +41,7 @@ class Credit_userModel extends Model
     // Récupérer toutes les demandes avec détails (user + credit)
     public function getAllAvecDetails(): array
     {
-        return $this->select('credits_users.*, users.nom, users.prenom, credits.code, credits.valeur')
+        return $this->select('credits_users.*, users.nom, credits.code, credits.valeur')
                     ->join('users',   'users.id   = credits_users.id_user')
                     ->join('credits', 'credits.id = credits_users.id_credit')
                     ->orderBy('date_demande', 'DESC')
@@ -49,9 +49,12 @@ class Credit_userModel extends Model
     }
 
     // Récupérer toutes les demandes en attente (pour le back office)
-    public function PendingList(): array
+    public function getDemandesEnAttente(): array
     {
-        return $this->where('estAccepte', null)
+        return $this->select('credits_users.*, users.nom, credits.code, credits.valeur, credits_users.id as id_demande')
+                    ->join('users',   'users.id   = credits_users.id_user')
+                    ->join('credits', 'credits.id = credits_users.id_credit')
+                    ->where('est_accepte', null)
                     ->findAll();
     }
 
@@ -63,7 +66,7 @@ class Credit_userModel extends Model
             'id_credit'    => $creditId,
             'date_demande' => date('Y-m-d H:i:s'),
             'est_accepte'   => null,   // null = en attente
-            'admin_id'     => null,
+            'id_admin'     => null,
             'date_reponse'=> null,
         ]);
     }
@@ -72,7 +75,7 @@ class Credit_userModel extends Model
     public function repondre(int $id, int $adminId, bool $accepte): bool
     {
         return $this->update($id, [
-            'admin_id'      => $adminId,
+            'id_admin'      => $adminId,
             'est_accepte'    => $accepte ? 1 : 0,
             'date_reponse' => date('Y-m-d H:i:s'),
         ]);

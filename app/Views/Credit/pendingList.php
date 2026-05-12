@@ -1,17 +1,6 @@
 <?= $this->setVar('title', 'Crédits en attente')->extend('Layout/backoffice') ?>
 
 
-<?php
-$credits = [
-  ['id' => 1, 'valeur' => 10000, 'code' => '79438745728652', 'nom' => 'Rakoto', 'prenom' => 'Jean', 'date_demande' => '2026-05-10'],
-  ['id' => 2, 'valeur' => 20000, 'code' => '79438745728652', 'nom' => 'Rakoto', 'prenom' => 'Jean', 'date_demande' => '2026-05-10'],
-  ['id' => 3, 'valeur' => 5000, 'code' => '79438745728652', 'nom' => 'Rakoto', 'prenom' => 'Jean', 'date_demande' => '2026-05-10'],
-  ['id' => 4, 'valeur' => 2000, 'code' => '79438745728652', 'nom' => 'Rakoto', 'prenom' => 'Jean', 'date_demande' => '2026-05-10'],
-  ['id' => 5, 'valeur' => 10000, 'code' => '79438745728652', 'nom' => 'Rakoto', 'prenom' => 'Jean', 'date_demande' => '2026-05-10'],
-];
-?>
-
-
 <?= $this->section('topbar') ?>
 <div class="page-title">
   <h1>Crédits en attente</h1>
@@ -30,21 +19,21 @@ $credits = [
     <th>Date</th>
     <th></th>
   </tr>
-  <?php foreach ($credits as $credit): ?>
+  <?php foreach ($demandes as $demande): ?>
     <tr>
-      <td><?= esc($credit['id']) ?></td>
-      <td><?= esc($credit['valeur']) ?> Ar</td>
-      <td><?= esc($credit['code']) ?></td>
-      <td><?= esc($credit['nom']) ?> <?= esc($credit['prenom']) ?></td>
-      <td><?= esc($credit['date_demande']) ?></td>
+      <td><?= esc($demande['id_demande']) ?></td>
+      <td><?= esc($demande['valeur']) ?> Ar</td>
+      <td><?= esc($demande['code']) ?></td>
+      <td><?= esc($demande['nom']) ?></td>
+      <td><?= esc($demande['date_demande']) ?></td>
       <td>
         <div class="table-actions">
           <button type="button" class="btn btn-danger refuse-button"
-                  data-id="<?= esc($credit['id']) ?>" data-url="<?= base_url("/backoffice/credits/pending/{$credit['id']}/refuse") ?>">
+                  data-id="<?= esc($demande['id_demande']) ?>" data-url="<?= base_url("/backoffice/credits/refuser/{$demande['id_demande']}") ?>">
             Refuser
           </button>
           <button type="button" class="btn btn-primary accept-button"
-                  data-id="<?= esc($credit['id']) ?>" data-url="<?= base_url("/backoffice/credits/pending/{$credit['id']}/accept") ?>">
+                  data-id="<?= esc($demande['id_demande']) ?>" data-url="<?= base_url("/backoffice/credits/accepter/{$demande['id_demande']}") ?>">
             Accepter
           </button>
         </div>
