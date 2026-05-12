@@ -20,22 +20,21 @@ $title = $title ?? '…'; // Le titre de la page
     <div class="profile">
       <img class="avatar" src="<?= base_url('/assets/images/avatar-admin.jpg') ?>">
       <div class="profile-info">
-        <h3>Nom de l’admin</h3>
-        <p>admin@example.com</p>
+        <h3><?= session('admin')['nom'] ?></h3>
       </div>
     </div>
 
     <nav class="sidebar-nav" aria-label="Sidebar">
-      <a class="nav-link active" href="<?= base_url('/backoffice/dashboard') ?>">Tableau de bord</a>
-      <a class="nav-link" href="<?= base_url('/backoffice/regimes') ?>">Régimes</a>
-      <a class="nav-link" href="<?= base_url('/backoffice/sports') ?>">Activités sportives</a>
-      <a class="nav-link" href="<?= base_url('/backoffice/credits') ?>">Crédits</a>
-      <a class="nav-link" href="<?= base_url('/backoffice/credits/pending') ?>">Crédits en attente</a>
-      <a class="nav-link" href="<?= base_url('/backoffice/settings') ?>">Paramètres</a>
+      <a class="nav-link <?= str_starts_with(uri_string(), 'backoffice/dashboard') ? 'active' : '' ?>" href="<?= base_url('/backoffice/dashboard') ?>">Tableau de bord</a>
+      <a class="nav-link <?= str_starts_with(uri_string(), 'backoffice/regimes') ? 'active' : '' ?>" href="<?= base_url('/backoffice/regimes') ?>">Régimes</a>
+      <a class="nav-link <?= str_starts_with(uri_string(), 'backoffice/sports') ? 'active' : '' ?>" href="<?= base_url('/backoffice/sports') ?>">Activités sportives</a>
+      <a class="nav-link <?= str_starts_with(uri_string(), 'backoffice/credits') && uri_string() != 'backoffice/credits/pending' ? 'active' : '' ?>" href="<?= base_url('/backoffice/credits') ?>">Crédits</a>
+      <a class="nav-link <?= uri_string() == 'backoffice/credits/pending' ? 'active' : '' ?>" href="<?= base_url('/backoffice/credits/pending') ?>">Crédits en attente</a>
+      <a class="nav-link <?= str_starts_with(uri_string(), 'backoffice/settings') ? 'active' : '' ?>" href="<?= base_url('/backoffice/settings') ?>">Paramètres</a>
     </nav>
 
     <div class="sidebar-actions">
-      <a class="btn btn-danger">Se déconnecter</a>
+      <a href="<?= base_url('/backoffice/logout') ?>" class="btn btn-danger">Se déconnecter</a>
     </div>
   </aside>
 
@@ -44,12 +43,15 @@ $title = $title ?? '…'; // Le titre de la page
       <?= $this->renderSection('topbar') ?>
     </header>
 
-    <div class="info good">
-      <strong>Succès :</strong> Ceci est un message qui indique que tout s’est bien passé.
-    </div>
-    <div class="info bad">
-      <strong>Erreur :</strong> Ceci est un message qui indique que quelque chose s’est mal passée.
-    </div>
+    <?php if (session()->getFlashdata('success') !== null): ?>
+      <div class="info good">
+        <strong>Succès :</strong> <?= esc(session()->getFlashdata('success')) ?>
+      </div>
+    <?php elseif (session()->getFlashdata('error') !== null): ?>
+      <div class="info bad">
+        <strong>Erreur :</strong> <?= esc(session()->getFlashdata('error')) ?>
+      </div>
+    <?php endif; ?>
 
     <?= $this->renderSection('content') ?>
   </main>
