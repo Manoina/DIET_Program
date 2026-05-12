@@ -8,7 +8,7 @@ create table credits_users(
     date_reponse DATE,
 
     FOREIGN KEY (id_user) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (id_admin) REFERENCES admin(id) ON DELETE CASCADE ON UPDATE CASCADE
+    FOREIGN KEY (id_admin) REFERENCES admins(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 
