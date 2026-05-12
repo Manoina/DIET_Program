@@ -27,7 +27,7 @@ class AdminController extends BaseController
             return redirect()->to('/backoffice/dashboard');
         }
 
-        return view('Backoffice/login');
+        return view('Admin/loginForm');
     }
 
     // POST /backoffice/login
@@ -41,14 +41,14 @@ class AdminController extends BaseController
 
         if (!$admin) {
             return redirect()->back()
-                             ->with('error_email', 'Email non existante.')
+                             ->with('error', 'Email non existante.')
                              ->withInput();
         }
 
         // Étape 2 — Vérifier le mot de passe
         if (!password_verify($password, $admin['password'])) {
             return redirect()->back()
-                             ->with('error_password', 'Mot de passe incorrect.')
+                             ->with('error', 'Mot de passe incorrect.')
                              ->withInput();
         }
 
@@ -80,8 +80,6 @@ class AdminController extends BaseController
     // GET /backoffice/dashboard
     public function dashboard()
     {
-        if ($redirect = $this->checkAdminAuth()) return $redirect;
-
-        return view('Backoffice/dashboard');
+        return view('Admin/dashboard');
     }
 }
