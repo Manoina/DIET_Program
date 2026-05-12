@@ -4,7 +4,7 @@
 <?php $errors = session()->getFlashdata('errors') ?? [] ?>
 
 <?php
-$sport = ['id' => 1, 'nom' => 'Activité sportive 1', 'var_poids_jour' => -12];
+$sport = $sport ?? [];
 ?>
 
 

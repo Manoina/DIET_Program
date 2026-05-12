@@ -21,7 +21,7 @@ class CreditController extends BaseController
     // =============================================================
     //  POST /frontoffice/credit/demander
     //  User soumet un code → insertion dans credit_user en attente
-    //  estAccepte = null, date_response = null
+    //  estAccepte = null, date_reponse = null
     // =============================================================
     public function demanderCredit()
     {
@@ -39,8 +39,8 @@ class CreditController extends BaseController
 
         // Vérifier que le user n'a pas déjà soumis ce même code
         $dejaEnvoyee = $this->creditUserModel
-                            ->where('user_id',   $userId)
-                            ->where('credit_id', $credit['id'])
+                            ->where('id_user',   $userId)
+                            ->where('id_credit', $credit['id'])
                             ->first();
 
         if ($dejaEnvoyee) {
@@ -48,7 +48,7 @@ class CreditController extends BaseController
                              ->with('error', 'Vous avez déjà soumis ce code.');
         }
 
-        // Insertion : estAccepte = null, date_response = null
+        // Insertion : estAccepte = null, date_reponse = null
         $this->creditUserModel->soumettreDemande($userId, $credit['id']);
 
         return redirect()->back()
@@ -64,7 +64,7 @@ class CreditController extends BaseController
         $userId   = session()->get('user_id');
         $demandes = $this->creditUserModel->getDemandesUser($userId);
 
-        return view('Frontoffice/Credit/historique', [
+        return view('Credit/listUser', [
             'demandes' => $demandes,
         ]);
     }

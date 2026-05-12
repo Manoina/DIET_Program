@@ -1,19 +1,13 @@
 <?= $this->setVar('title', 'Profil')->extend('Layout/frontoffice') ?>
 
 
-<?php
-$user = ['nom' => 'Rakoto', 'genre' => 'M', 'email' => 'rakoto@example.com', 'taille' => 150, 'poids' => 50];
-$imc = 22.22;
-?>
-
-
 <?= $this->section('topbar') ?>
 <div class="page-title">
   <h1>Mon profil</h1>
   <p>Vérifiez vos informations.</p>
 </div>
 <div class="topbar-actions">
-  <a href="<?= base_url('/frontoffice/profile/edit') ?>" class="btn btn-primary">Modifier le profil</a>
+  <a href="<?= base_url('/frontoffice/profil/modifier') ?>" class="btn btn-primary">Modifier le profil</a>
 </div>
 <?= $this->endSection() ?>
 

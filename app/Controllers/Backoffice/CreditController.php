@@ -28,7 +28,7 @@ class CreditController extends BaseController
     {
         $demandes = $this->creditUserModel->getDemandesEnAttente();
 
-        return view('Backoffice/Credit/pending', [
+        return view('Credit/pendingList', [
             'demandes' => $demandes,
         ]);
     }
@@ -50,26 +50,26 @@ class CreditController extends BaseController
         }
 
         // Récupérer la valeur du crédit
-        $credit = $this->creditModel->findById($demande['credit_id']);
+        $credit = $this->creditModel->findById($demande['id_credit']);
 
         // 1 — Accepter cette demande
         $this->creditUserModel->repondre($id, $adminId, true);
 
         // 2 — Refuser automatiquement toutes les autres demandes
-        //     avec le même credit_id (un code = un seul usage)
+        //     avec le même id_credit (un code = un seul usage)
         $this->creditUserModel
-             ->where('credit_id', $demande['credit_id'])
+             ->where('id_credit', $demande['id_credit'])
              ->where('id !=',     $id)
-             ->where('estAccepte', null)
+             ->where('est_accepte', null)
              ->set([
-                 'estAccepte'    => 0,
-                 'admin_id'      => $adminId,
-                 'date_response' => date('Y-m-d H:i:s'),
+                 'est_accepte'    => 0,
+                 'id_admin'      => $adminId,
+                 'date_reponse' => date('Y-m-d H:i:s'),
              ])
              ->update();
 
         // 3 — Créditer le solde du user
-        $this->userModel->crediterSolde($demande['user_id'], $credit['valeur']);
+        $this->userModel->crediterSolde($demande['id_user'], $credit['valeur']);
 
         return redirect()->back()
                          ->with('success', 'Demande acceptée et solde crédité.');

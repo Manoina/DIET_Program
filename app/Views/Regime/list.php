@@ -2,13 +2,7 @@
 
 
 <?php
-$regimes = [
-  ['id' => 1, 'nom' => 'Régime 1', 'taux_viande' => 12, 'taux_volaille' => 14.90, 'taux_poisson' => 10.25, 'var_poids_jour' => -12, 'prix_jour' => 13],
-  ['id' => 2, 'nom' => 'Régime 2', 'taux_viande' => 12, 'taux_volaille' => 14.90, 'taux_poisson' => 10.25, 'var_poids_jour' => 5, 'prix_jour' => 14],
-  ['id' => 3, 'nom' => 'Régime 3', 'taux_viande' => 12, 'taux_volaille' => 14.90, 'taux_poisson' => 10.25, 'var_poids_jour' => -17, 'prix_jour' => 15],
-  ['id' => 4, 'nom' => 'Régime 4', 'taux_viande' => 12, 'taux_volaille' => 14.90, 'taux_poisson' => 10.25, 'var_poids_jour' => -2, 'prix_jour' => 16],
-  ['id' => 5, 'nom' => 'Régime 5', 'taux_viande' => 12, 'taux_volaille' => 14.90, 'taux_poisson' => 10.25, 'var_poids_jour' => +1, 'prix_jour' => 17],
-];
+$regimes = $regimes ?? [];
 ?>
 
 

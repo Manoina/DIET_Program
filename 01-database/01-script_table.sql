@@ -1,5 +1,5 @@
-create database s4_ras;
-use s4_ras;
+create database s4_diet_program;
+use s4_diet_program;
 
 -- ADMINS
 create table admins (

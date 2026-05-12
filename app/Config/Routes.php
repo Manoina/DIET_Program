@@ -47,6 +47,12 @@ $routes->group('frontoffice', ['filter' => 'auth'], function ($routes) {
     $routes->get('programmes/user',   'Frontoffice\ProgramController::getProgramByUserId');
     $routes->get('programmes/user/(:num)', 'Frontoffice\ProgramController::getProgramByUserId/$1');
     $routes->get('programmes/(:num)/sports', 'Frontoffice\Program_sportController::getSportsByProgramId/$1');
+
+    // Suggestions de programme
+    $routes->get('suggestions/regimes', 'Frontoffice\Suggested_ProgramController::getAllRegimeBy_varPoids_jour');
+    $routes->post('suggestions/regimes', 'Frontoffice\Suggested_ProgramController::getAllRegimeBy_varPoids_jour');
+    $routes->get('suggestions/sports', 'Frontoffice\Suggested_ProgramController::getAllSportBy_varPoids_jour');
+    $routes->post('suggestions/sports', 'Frontoffice\Suggested_ProgramController::getAllSportBy_varPoids_jour');
 });
 
 // =============================================================
@@ -69,8 +75,31 @@ $routes->group('backoffice', ['filter' => 'admin'], function ($routes) {
     $routes->get('credits/pending',          'Backoffice\CreditController::pendingList');
     $routes->post('credits/accepter/(:num)', 'Backoffice\CreditController::accepterCredit/$1');
     $routes->post('credits/refuser/(:num)',  'Backoffice\CreditController::refuserCredit/$1');
+    // Régimes
+    $routes->get('regimes', 'RegimeController::list');
+    $routes->get('regimes/new', 'RegimeController::newForm');
+    $routes->post('regimes/new', 'RegimeController::submitNewForm');
+    $routes->get('regimes/(:num)/edit', 'RegimeController::editForm/$1');
+    $routes->post('regimes/(:num)/edit', 'RegimeController::submitEditForm/$1');
+    $routes->post('regimes/(:num)/delete', 'RegimeController::delete/$1');
 
-    // Régimes & sports
-    $routes->get('regimes', 'Frontoffice\RegimeController::regimeList');
-    $routes->get('sports',  'Frontoffice\SportController::sportList');
+    //  Sports
+    $routes->get('sports', 'SportController::list');
+    $routes->get('sports/new', 'SportController::newForm');
+    $routes->post('sports/new', 'SportController::submitNewForm');
+    $routes->get('sports/(:num)/edit', 'SportController::editForm/$1');
+    $routes->post('sports/(:num)/edit', 'SportController::submitEditForm/$1');
+    $routes->post('sports/(:num)/delete', 'SportController::delete/$1');
+
+    // Crédits
+    $routes->get('credits', 'CreditController::list');
+    $routes->get('credits/new', 'CreditController::newForm');
+    $routes->post('credits/new', 'CreditController::submitNewForm');
+    $routes->get('credits/(:num)/edit', 'CreditController::editForm/$1');
+    $routes->post('credits/(:num)/edit', 'CreditController::submitEditForm/$1');
+    $routes->post('credits/(:num)/delete', 'CreditController::delete/$1');
+
+    // Settings
+    $routes->get('settings', 'Backoffice\SettingsController::editForm');
+    $routes->post('settings/edit', 'Backoffice\SettingsController::submitEditForm');
 });

@@ -20,7 +20,7 @@ class UserController extends BaseController
         $user = $this->userModel->find(session()->get('user_id'));
         $imc  = $this->userModel->calculerIMC((float) $user['poids'], (float) $user['taille']);
 
-        return view('Frontoffice/User/profile', [
+        return view('User/profile', [
             'user' => $user,
             'imc'  => $imc,
         ]);
@@ -31,7 +31,7 @@ class UserController extends BaseController
     {
         $user = $this->userModel->find(session()->get('user_id'));
 
-        return view('Frontoffice/User/editForm', [
+        return view('User/editForm', [
             'user' => $user,
         ]);
     }
@@ -43,10 +43,9 @@ class UserController extends BaseController
 
         if (!$this->validate([
             'nom'      => 'required|min_length[2]',
-            'genre'    => 'required|in_list[homme,femme]',
+            'genre'    => 'required|in_list[M,F]',
             'taille'   => 'required|numeric',
             'poids'    => 'required|numeric',
-            'objectif' => 'required|in_list[augmenter,reduire,imc_ideal]',
         ])) {
             return redirect()->back()
                              ->with('errors', $this->validator->getErrors())
@@ -58,7 +57,6 @@ class UserController extends BaseController
             'genre'    => $this->request->getPost('genre'),
             'taille'   => $this->request->getPost('taille'),
             'poids'    => $this->request->getPost('poids'),
-            'objectif' => $this->request->getPost('objectif'),
         ];
 
         // Password mis à jour uniquement si l'user en saisit un nouveau
