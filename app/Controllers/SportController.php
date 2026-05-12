@@ -22,14 +22,14 @@ class SportController extends BaseController
             'sports' => $this->sportModel->findAll(),
         ];
 
-        return view('Backoffice/Sport/list', $data);
+        return view('Sport/list', $data);
     }
 
     // GET /backoffice/sports/new
 
     public function newForm()
     {
-        return view('Backoffice/Sport/newForm');
+        return view('Sport/newForm');
     }
 
     // POST /backoffice/sports/new
@@ -72,7 +72,7 @@ class SportController extends BaseController
             'sport' => $sport,
         ];
 
-        return view('Backoffice/Sport/editForm', $data);
+        return view('Sport/editForm', $data);
     }
 
     // POST /backoffice/sports/:id/edit

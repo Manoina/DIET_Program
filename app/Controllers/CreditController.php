@@ -22,14 +22,14 @@ class CreditController extends BaseController
             'credits' => $this->creditModel->findAll(),
         ];
 
-        return view('Backoffice/Credit/list', $data);
+        return view('Credit/list', $data);
     }
 
     // GET /backoffice/credits/new
 
     public function newForm()
     {
-        return view('Backoffice/Credit/newForm');
+        return view('Credit/newForm');
     }
 
     // POST /backoffice/credits/new
@@ -69,7 +69,7 @@ class CreditController extends BaseController
             'credit' => $credit,
         ];
 
-        return view('Backoffice/Credit/editForm', $data);
+        return view('Credit/editForm', $data);
     }
 
     // POST /backoffice/credits/:id/edit
