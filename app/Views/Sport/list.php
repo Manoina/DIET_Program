@@ -2,13 +2,7 @@
 
 
 <?php
-$sports = [
-  ['id' => 1, 'nom' => 'Activité sportive 1', 'var_poids_jour' => -12],
-  ['id' => 2, 'nom' => 'Activité sportive 2', 'var_poids_jour' => 0],
-  ['id' => 3, 'nom' => 'Activité sportive 3', 'var_poids_jour' => -17],
-  ['id' => 4, 'nom' => 'Activité sportive 4', 'var_poids_jour' => -2],
-  ['id' => 5, 'nom' => 'Activité sportive 5', 'var_poids_jour' => -1],
-];
+$sports = $sports ?? [];
 ?>
 
 
