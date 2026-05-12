@@ -28,6 +28,18 @@ class Credit_userModel extends Model
         return $this->find($id);
     }
 
+    // Récupérer les demandes de crédit par jour pour le tableau de bord
+    public function getDailyRequestCounts(int $days = 7): array
+    {
+        $startDate = date('Y-m-d', strtotime('-' . ($days - 1) . ' days'));
+
+        return $this->select('DATE(date_demande) AS periode, COUNT(*) AS total', false)
+                    ->where('date_demande >=', $startDate)
+                    ->groupBy('periode')
+                    ->orderBy('periode', 'ASC')
+                    ->findAll();
+    }
+
     // Récupérer les demandes d'un user spécifique
     public function getDemandesUser(int $userId): array
     {
